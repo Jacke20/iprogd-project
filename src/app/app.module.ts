@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
-
-import { AppComponent } from './app.component';
+import { AngularFireModule } from 'angularfire2';
 import { AppRoutingModule } from './app-routing-module';
 
-import { AngularFireModule } from 'angularfire2';
+import { AppComponent } from './app.component';
 import { ConcertComponent } from './concert/concert.component';
+import { UserComponent } from './user/user.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const firebaseConfig = {
@@ -23,6 +23,7 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     ConcertComponent,
+    UserComponent,
     PageNotFoundComponent
   ],
   imports: [
