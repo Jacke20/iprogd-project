@@ -1,3 +1,7 @@
+<nav>
+  <a routerLink="/test" routerLinkActive="active">Test</a>
+</nav>
+
 <h1>
   {{title}}
 </h1>
@@ -7,3 +11,7 @@
     {{item.$value}}
   </li>
 </ul>
+
+<div class="outer-outlet">
+  <router-outlet></router-outlet>
+</div>
