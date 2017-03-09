@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AppRoutingModule } from './app-routing-module';
+import { MaterializeModule } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
 import { ConcertComponent } from './concert/concert.component';
@@ -31,7 +32,8 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AppRoutingModule
+    AppRoutingModule,
+    MaterializeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
