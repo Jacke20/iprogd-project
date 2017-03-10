@@ -1,6 +1,16 @@
 <nav>
-  <a routerLink="/concerts" routerLinkActive="active">Concert</a>
-  <a routerLink="/user" routerLinkActive="active">User</a>
+	<div class="nav-wrapper">
+		<a class="brand-logo">Logo</a>
+		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+		<ul class="right hide-on-med-and-down">
+		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
+		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
+	  	</ul>
+	  	<ul class="side-nav" id="mobile-demo">
+		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
+		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
+      	</ul>
+ 	</div>
 </nav>
 
 <h1>
@@ -13,6 +23,6 @@
   </li>
 </ul>
 
-<div class="outer-outlet">
+<div class="outer-outlet container">
   <router-outlet></router-outlet>
 </div>
