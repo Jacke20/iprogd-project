@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 import { UserService } from './user.service';
+import { Observable, Subject} from "rxjs/Rx";
+import { Router } from "@angular/router";
+import { AuthService } from "./auth.service";
+
 
 @Component({
   selector: 'app-root',
@@ -9,19 +13,24 @@ import { UserService } from './user.service';
   providers: [UserService]
 })
 export class AppComponent {
-  title = 'App works!';
-  users: FirebaseListObservable<any>;
-  constructor(private userService: UserService) { }
+  user = {};
 
-  getUsers(): void {
-    // Pass our callback function as an argument to the Promise's then method
-    this.users = this.userService.getUsers();
+  constructor(public af: AngularFire, private authService: AuthService) {
+    this.af.auth.subscribe(auth => console.log("Authentication: " + auth));
+    this.user = authService.user;
   }
 
-  // ngOnInit used to keep complex logic out of the constructor. There are other ng methods for things like changes etc.
-  // Read about lifecycle hooks to learn more.
-  // We used the ngOnInit Lifecycle Hook to get users when our AppComponent activates.
-  ngOnInit(): void {
-    this.getUsers();
+  // Global authentication methods
+  isAuth() {
+    return this.authService.isAuthenticated();
   }
+
+  login() {
+    return this.authService.login();
+  }
+
+  logout() {
+    return this.authService.logout();
+  }
+
 }

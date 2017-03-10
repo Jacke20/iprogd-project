@@ -1,28 +1,31 @@
-<nav>
+<nav id="main-nav">
 	<div class="nav-wrapper">
 		<a class="brand-logo">Logo</a>
 		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 		<ul class="right hide-on-med-and-down">
 		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
 		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
-	  	</ul>
-	  	<ul class="side-nav" id="mobile-demo">
+      <li>
+        <div> {{ (af.auth | async)?.uid }} </div>
+        <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
+        <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
+       
+      </li>
+	  </ul>
+	  <ul class="side-nav" id="mobile-demo">
 		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
 		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
-      	</ul>
+      <li>
+        <div> {{ (af.auth | async)?.uid }} </div>
+        <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
+        <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
+      </li>
+    </ul>
  	</div>
 </nav>
-
-<h1>
-  {{title}}
-</h1>
-
-<ul>
-  <li class="text" *ngFor="let user of users | async">
-    <b>{{user.$key}}</b>&nbsp;<span>{{user.description}}</span>
-  </li>
-</ul>
 
 <div class="outer-outlet container">
   <router-outlet></router-outlet>
 </div>
+
+<!-- TODO: Add global footer -->

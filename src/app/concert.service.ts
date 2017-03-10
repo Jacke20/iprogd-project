@@ -9,7 +9,7 @@ export class ConcertService {
   constructor() { }
 
   // Make use of promises for asynchronous calls (use for API calls later)
-  getConerts(): Promise<[string]> {
+  getConcerts(): Promise<[string]> {
     return Promise.resolve(this.concerts);
 
     // Fetch result from this method like this
