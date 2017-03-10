@@ -6,18 +6,25 @@ import { Router } from "@angular/router";
 import { AuthService } from "./services/auth.service";
 
 
+// TODO: Remove
+import { SpotifyService } from "./services/spotify.service";
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService]
+  providers: [UserService, SpotifyService] // TODO: Remove SpotifyService
 })
 export class AppComponent {
   user = {};
 
-  constructor(public af: AngularFire, private authService: AuthService) {
+  constructor(public af: AngularFire, private authService: AuthService, private spotifyService: SpotifyService) {
     this.af.auth.subscribe(auth => console.log("Authentication: " + auth));
     this.user = authService.user;
+
+    // TODO: Remove
+    spotifyService.getAlbumsForArtist("0OdUWJ0sBjDrqHygGUXeCF");
   }
 
   // Global authentication methods

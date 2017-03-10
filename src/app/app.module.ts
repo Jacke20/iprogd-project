@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AppRoutingModule } from './app-routing-module';
@@ -53,6 +53,7 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     AppRoutingModule,
     MaterializeModule
