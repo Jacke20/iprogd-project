@@ -6,7 +6,6 @@
 		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
 		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
       <li>
-        <div> {{ (af.auth | async)?.uid }} </div>
         <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
         <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
        
@@ -16,7 +15,6 @@
 		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
 		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
       <li>
-        <div> {{ (af.auth | async)?.uid }} </div>
         <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
         <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
       </li>
@@ -27,5 +25,8 @@
 <div class="outer-outlet container">
   <router-outlet></router-outlet>
 </div>
+
+<h4 *ngIf="isAuth()">Logged in user id</h4>
+<div> {{ (af.auth | async)?.uid }} </div>
 
 <!-- TODO: Add global footer -->
