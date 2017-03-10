@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
-import { UserService } from './user.service';
+import { UserService } from './services/user.service';
 import { Observable, Subject} from "rxjs/Rx";
 import { Router } from "@angular/router";
-import { AuthService } from "./auth.service";
+import { AuthService } from "./services/auth.service";
 
 
 @Component({

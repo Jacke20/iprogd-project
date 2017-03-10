@@ -13,11 +13,12 @@ import { UserComponent } from './user/user.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 // Authentication
-import { AuthService } from "./auth.service";
+import { AuthService } from "./services/auth.service";
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 
 import { initializeApp, database } from 'firebase';
+import { HomeComponent } from './home/home.component';
 
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
@@ -45,7 +46,8 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     UserComponent,
     PageNotFoundComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
