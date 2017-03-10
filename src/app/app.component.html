@@ -18,8 +18,8 @@
 </h1>
 
 <ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.$value}}
+  <li class="text" *ngFor="let user of users | async">
+    <b>{{user.$key}}</b>&nbsp;<span>{{user.description}}</span>
   </li>
 </ul>
 
