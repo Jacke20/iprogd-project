@@ -25,6 +25,7 @@ export class AppComponent {
 
     // TODO: Remove
     spotifyService.getAlbumsForArtist("0OdUWJ0sBjDrqHygGUXeCF");
+    spotifyService.searchArtists("Bankroll fresh");
   }
 
   // Global authentication methods

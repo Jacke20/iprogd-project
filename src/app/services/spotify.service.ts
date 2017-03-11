@@ -39,4 +39,14 @@ export class SpotifyService{
     );
   }
 
+  searchArtists(artist_name) {
+    this.apiUrl = 'https://api.spotify.com/v1/search?q=' + artist_name + '*&type=artist';
+    this.http.get(this.apiUrl, this.headers)
+    .map(res => res.json())
+    .subscribe(
+      err => console.log(err),
+      () => console.log('Api request complete')
+    );
+  }
+
 }
