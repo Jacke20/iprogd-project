@@ -4,7 +4,7 @@
 		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse link"><i class="material-icons">menu</i></a>
 		<ul class="right hide-on-med-and-down">
 		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
-		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
+		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
       <li>
         <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
         <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
@@ -13,7 +13,7 @@
 	  </ul>
 	  <ul class="side-nav" id="mobile-demo">
 		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
-		  <li><a routerLink="/user" routerLinkActive="active">User</a></li>
+		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
       <li>
         <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
         <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
@@ -27,7 +27,10 @@
 </div>
 
 <!-- Simultaneously apply the directive and set the color in the same attribute (Highlighted with parent component's color) -->
+<!-- async pipe allows us to bind our templates directly to values that arrive asynchronously. -->
 <h4 *ngIf="isAuth()" [myHighlight]="color">Logged in user id</h4>
 <div> {{ (af.auth | async)?.uid }} </div>
+
+<div>{{ 10 | testPipe:5 }}</div>
 
 <!-- TODO: Add global footer -->

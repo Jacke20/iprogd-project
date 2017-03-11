@@ -22,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 
 // Test
 import { TestDirective } from './directives/test.directive';
+import { TestPipe } from './pipes/test.pipe';
 
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
@@ -51,7 +52,8 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     SigninComponent,
     SignupComponent,
     HomeComponent,
-    TestDirective
+    TestDirective,
+    TestPipe
   ],
   imports: [
     BrowserModule,

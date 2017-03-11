@@ -21,7 +21,7 @@ export class AppComponent {
   color = 'red'; // TODO: Remove later
 
   constructor(public af: AngularFire, private authService: AuthService, private spotifyService: SpotifyService) {
-    this.af.auth.subscribe(auth => console.log("Authentication: " + auth));
+    this.af.auth.subscribe(auth => console.log(auth));
     this.user = authService.user;
 
     // TODO: Remove later
