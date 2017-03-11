@@ -8,17 +8,20 @@ import { AppRoutingModule } from './app-routing-module';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
-import { ConcertComponent } from './concert/concert.component';
-import { UserComponent } from './user/user.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ConcertComponent } from './components/concert/concert.component';
+import { UserComponent } from './components/user/user.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 // Authentication
 import { AuthService } from "./services/auth.service";
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 import { initializeApp, database } from 'firebase';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
+
+// Test
+import { TestDirective } from './directives/test.directive';
 
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
@@ -47,7 +50,8 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     PageNotFoundComponent,
     SigninComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    TestDirective
   ],
   imports: [
     BrowserModule,

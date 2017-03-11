@@ -26,7 +26,8 @@
   <router-outlet></router-outlet>
 </div>
 
-<h4 *ngIf="isAuth()">Logged in user id</h4>
+<!-- Simultaneously apply the directive and set the color in the same attribute (Highlighted with parent component's color) -->
+<h4 *ngIf="isAuth()" [myHighlight]="color">Logged in user id</h4>
 <div> {{ (af.auth | async)?.uid }} </div>
 
 <!-- TODO: Add global footer -->
