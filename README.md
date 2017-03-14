@@ -3,9 +3,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.1.
 
 ## För att deploya på firebase:
-1. Kör 'ng build --prod' för att göra en production build till dist-mappen
-2. firebase login
-3. firebase deploy
+1. Kör `ng build --prod` för att göra en production build till dist-mappen
+2. `firebase login`
+3. `firebase deploy`
 4. DONE!
 
 ## Development server
