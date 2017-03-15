@@ -1,5 +1,5 @@
-import { Injectable }             from '@angular/core';
-import { Http, Response, Headers }         from '@angular/http';
+import { Injectable }                       from '@angular/core';
+import { Http, Response, Headers }          from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -24,8 +24,9 @@ export class SpotifyService{
     this.http.get(this.apiUrl, this.headers)
     .map(res => res.json())
     .subscribe(
-      err => console.log(err),
-      () => console.log('Api request complete')
+      value => console.log(value),
+      error => console.log(<any>error),
+      () => console.log('Spotify API request complete')
     );
   }
 
@@ -34,8 +35,9 @@ export class SpotifyService{
     this.http.get(this.apiUrl, this.headers)
     .map(res => res.json())
     .subscribe(
-      err => console.log(err),
-      () => console.log('Api request complete')
+      value => console.log(value),
+      error => console.log(<any>error),
+      () => console.log('Spotify API request complete')
     );
   }
 
@@ -44,8 +46,9 @@ export class SpotifyService{
     this.http.get(this.apiUrl, this.headers)
     .map(res => res.json())
     .subscribe(
-      err => console.log(err),
-      () => console.log('Api request complete')
+      value => console.log(value),
+      error => console.log(<any>error),
+      () => console.log('Spotify API request complete')
     );
   }
 

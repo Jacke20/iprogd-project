@@ -7,26 +7,31 @@ import { AuthService } from "./services/auth.service";
 
 
 // TODO: Remove
-import { SpotifyService } from "./services/spotify.service";
+import { SpotifyService }    from "./services/spotify.service";
+import { ConcertService }    from "./services/concert.service";
+
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService, SpotifyService] // TODO: Remove SpotifyService
+  providers: [UserService, SpotifyService, ConcertService] // TODO: Remove SpotifyService
 })
 export class AppComponent {
   user = {};
   color = 'red'; // TODO: Remove later
 
-  constructor(public af: AngularFire, private authService: AuthService, private spotifyService: SpotifyService) {
+  constructor(public af: AngularFire, private authService: AuthService, 
+    private spotifyService: SpotifyService, private concertService: ConcertService) {
     this.af.auth.subscribe(auth => console.log(auth));
     this.user = authService.user;
 
     // TODO: Remove later
     spotifyService.getAlbumsForArtist("0OdUWJ0sBjDrqHygGUXeCF");
     spotifyService.searchArtists("Bankroll fresh");
+
+    concertService.getConcerts("Stockholm");
   }
 
   // Global authentication methods

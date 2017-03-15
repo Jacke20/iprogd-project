@@ -1,22 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable }                       from '@angular/core';
+import { Http, Response, Headers }          from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 // Services provide things that we want to use on several locations in our app. For example we might want to use a list of
 // users or concerts on multiple places.
 @Injectable()
 export class ConcertService {
-  // TODO: Retrieve concerts by API call
-  concerts: [string];
-  constructor() { }
+  private apiUrl = 'http://api.eventful.com/json/events?';  // URL to Eventful API
+  private apiKey = 'bvNNtt52wBxVQ4Q8'; // API Key
 
-  // Make use of promises for asynchronous calls (use for API calls later)
-  getConcerts(): Promise<[string]> {
-    return Promise.resolve(this.concerts);
+  private headers = new Headers();
 
-    // Fetch result from this method like this
-    /*
-      // Pass our callback function as an argument to the Promise's then method
-      this.concertService.getConcerts().then(concerts => this.concerts = concerts);
-     */
+  constructor(public http: Http) { 
+    this.headers.append('app_key', this.apiKey);
+  }
+
+  getConcerts(location) {
+    this.apiUrl = this.apiUrl + 'q=music&l=' + location;
+    this.apiUrl = 'http://api.eventful.com/json/events/search?location=San+Diego';
+    this.http.get(this.apiUrl, this.headers)
+    .map(res => res.json())
+    .subscribe(
+      value => console.log(value),
+      error => console.log(<any>error),
+      () => console.log('Eventful API request complete')
+    );
   }
 
 }
