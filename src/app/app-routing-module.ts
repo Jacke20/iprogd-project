@@ -4,6 +4,8 @@ import { PageNotFoundComponent }   from './components/page-not-found/page-not-fo
 import { ConcertComponent }        from './components/concert/concert.component';
 import { UserComponent } 		       from './components/user/user.component';
 import { HomeComponent }           from './components/home/home.component';
+import { AuthGuard }               from './guards/auth.guard';
+import { AdminComponent }          from './components/admin/admin.component';
 
 
 
@@ -16,9 +18,26 @@ const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
+const adminRoutes: Routes = [
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        children: [
+          { path: 'user', component: UserComponent },
+        ],
+      }
+    ]
+  }
+];
+
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    RouterModule.forChild(adminRoutes)
   ],
   exports: [
     RouterModule
