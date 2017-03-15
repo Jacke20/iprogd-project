@@ -1,3 +1,4 @@
+// Module imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,18 +8,24 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AppRoutingModule } from './app-routing-module';
 import { MaterializeModule } from 'angular2-materialize';
 
+// Component imports
+import { HomeComponent } from './components/home/home.component';
 import { AppComponent } from './app.component';
 import { ConcertComponent } from './components/concert/concert.component';
 import { UserComponent } from './components/user/user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
+// Guard imports
+import { AuthGuard } from './guards/auth.guard';
 
 // Authentication
 import { AuthService } from "./services/auth.service";
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 
+// Temporary stuff
 import { initializeApp, database } from 'firebase';
-import { HomeComponent } from './components/home/home.component';
+
 
 // Test
 import { TestDirective } from './directives/test.directive';
@@ -66,7 +73,7 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     AppRoutingModule,
     MaterializeModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

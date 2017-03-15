@@ -11,13 +11,14 @@ import { AdminComponent }          from './components/admin/admin.component';
 
 const appRoutes: Routes = [
   { path: 'concerts', component: ConcertComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
+// TODO: Add routes if we want admin users
 const adminRoutes: Routes = [
   {
     path: 'admin',
@@ -36,11 +37,12 @@ const adminRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes),
-    RouterModule.forChild(adminRoutes)
+    RouterModule.forRoot(appRoutes)
+    //RouterModule.forChild(adminRoutes)
   ],
   exports: [
     RouterModule
-  ]
+  ],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {}
