@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ConcertService {
   private apiUrl = 'http://api.eventful.com/json/events?';  // URL to Eventful API
-  private apiKey = 'bvNNtt52wBxVQ4Q8'; // API Key
+  private apiKey = '2t89BH4xkbpwCHzs'; // API Key
 
   private headers = new Headers();
 
@@ -20,7 +20,7 @@ export class ConcertService {
 
   getConcerts(location) {
     this.apiUrl = this.apiUrl + 'q=music&l=' + location;
-    this.apiUrl = 'http://api.eventful.com/json/events/search?location=San+Diego';
+    this.apiUrl = 'http://api.eventful.com/json/events/search?location=San+Diego&app_key=' + this.apiKey;
     this.http.get(this.apiUrl, this.headers)
     .map(res => res.json())
     .subscribe(
