@@ -39,7 +39,7 @@ export class AppComponent {
     spotifyService.searchArtists("Bankroll fresh").subscribe(
       data => this.artists = data.artists.items
     );
-    concertService.getConcerts("Stockholm").subscribe(
+    concertService.getConcerts("Stockholm", 'date').subscribe(
       data => this.events = data.events.event
     );
   }

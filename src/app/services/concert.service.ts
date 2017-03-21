@@ -19,8 +19,8 @@ export class ConcertService {
   // To get CORS to work, install Moesif Origin & CORS Changer plugin for chrome and set 
   // Access-Control-Allow-Credentials to true in options
   // date is an optional parameter
-  getConcerts(location, date = 'All') {
-    this.apiUrl = this.apiUrl + 'q=music&location=' + location + '&date' + date;
+  getConcerts(location, sort_order = 'relevance', date = 'Future') {
+    this.apiUrl = this.apiUrl + 'q=music&location=' + location + '&date=' + date + '&sort_order=' + sort_order;
     // Append app_key
     this.apiUrl = this.apiUrl + '&app_key=' + this.apiKey;
     return this.http.get(this.apiUrl)
