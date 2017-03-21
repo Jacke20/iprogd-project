@@ -9,19 +9,18 @@ import 'rxjs/add/operator/map';
 // users or concerts on multiple places.
 @Injectable()
 export class ConcertService {
-  private apiUrl = 'http://api.eventful.com/json/events?';  // URL to Eventful API
+  private apiUrl = 'http://api.eventful.com/json/events/search?';  // URL to Eventful API
   private apiKey = '2t89BH4xkbpwCHzs'; // API Key
 
   private headers = new Headers();
 
-  constructor(public http: Http) { 
-    this.headers.append('app_key', this.apiKey);
-  }
+  constructor(public http: Http) { }
 
   getConcerts(location) {
-    this.apiUrl = this.apiUrl + 'q=music&l=' + location;
-    this.apiUrl = 'http://api.eventful.com/json/events/search?location=San+Diego&app_key=' + this.apiKey;
-    this.http.get(this.apiUrl, this.headers)
+    this.apiUrl = this.apiUrl + 'q=music&location=' + location;
+    // Append app_key
+    this.apiUrl = this.apiUrl + '&app_key=' + this.apiKey;
+    this.http.get(this.apiUrl)
     .map(res => res.json())
     .subscribe(
       value => console.log(value),
