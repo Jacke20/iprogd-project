@@ -22,6 +22,10 @@ export class AppComponent {
   user = {};
   color = 'red'; // TODO: Remove later
 
+  artists = [];
+  events = [];
+  songs = [];
+
   constructor(public af: AngularFire, private authService: AuthService, 
     private spotifyService: SpotifyService, private concertService: ConcertService) {
     this.af.auth.subscribe(auth => console.log(auth));
@@ -29,9 +33,15 @@ export class AppComponent {
 
     // TODO: Remove later
     spotifyService.getAlbumsForArtist("0OdUWJ0sBjDrqHygGUXeCF");
-    spotifyService.searchArtists("Bankroll fresh");
 
-    concertService.getConcerts("Stockholm");
+    // We have to call subscribe which lets us know when the request is finished since our
+    // service methods return Observables and they use promises.
+    spotifyService.searchArtists("Bankroll fresh").subscribe(
+      data => this.artists = data.artists.items
+    );
+    concertService.getConcerts("Stockholm").subscribe(
+      data => this.events = data.events.event
+    );
   }
 
   // Global authentication methods

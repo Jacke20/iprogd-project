@@ -33,4 +33,14 @@
 
 <div>{{ 10 | testPipe:5 }}</div>
 
+<h5>Artists found when searching for "Bankroll Fresh"</h5>
+<ul>
+  <li *ngFor="let artist of artists; let i = index">{{ artist.name }}</li>
+</ul>
+
+<h5>Music events found in stockholm</h5>
+<ul>
+  <li *ngFor="let event of events; let i = index"><b>{{ event.title }}</b>, Date: {{ event.start_time }}</li>
+</ul>
+
 <!-- TODO: Add global footer -->

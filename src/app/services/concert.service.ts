@@ -14,19 +14,17 @@ export class ConcertService {
 
   private headers = new Headers();
 
-  constructor(public http: Http) { }
+  constructor(private http: Http) { }
 
-  getConcerts(location) {
-    this.apiUrl = this.apiUrl + 'q=music&location=' + location;
+  // To get CORS to work, install Moesif Origin & CORS Changer plugin for chrome and set 
+  // Access-Control-Allow-Credentials to true in options
+  // date is an optional parameter
+  getConcerts(location, date = 'All') {
+    this.apiUrl = this.apiUrl + 'q=music&location=' + location + '&date' + date;
     // Append app_key
     this.apiUrl = this.apiUrl + '&app_key=' + this.apiKey;
-    this.http.get(this.apiUrl)
-    .map(res => res.json())
-    .subscribe(
-      value => console.log(value),
-      error => console.log(<any>error),
-      () => console.log('Eventful API request complete')
-    );
+    return this.http.get(this.apiUrl)
+    .map(res => res.json());
   }
 
 }
