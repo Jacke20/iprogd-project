@@ -1,7 +1,7 @@
 // Module imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
@@ -31,6 +31,7 @@ import { initializeApp, database } from 'firebase';
 import { TestDirective } from './directives/test.directive';
 import { TestPipe } from './pipes/test.pipe';
 import { AdminComponent } from './components/admin/admin.component';
+import { SearchComponent } from './components/search/search.component';
 
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
@@ -62,11 +63,13 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     HomeComponent,
     TestDirective,
     TestPipe,
-    AdminComponent
+    AdminComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     JsonpModule,
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),

@@ -27,7 +27,7 @@ export class AppComponent {
   songs = [];
 
   constructor(public af: AngularFire, private authService: AuthService, 
-    private spotifyService: SpotifyService, private concertService: ConcertService) {
+    private spotifyService: SpotifyService, private concertService: ConcertService, private router: Router) {
     this.af.auth.subscribe(auth => console.log(auth));
     this.user = authService.user;
 
@@ -38,9 +38,6 @@ export class AppComponent {
     // service methods return Observables and they use promises.
     spotifyService.searchArtists("Bankroll fresh").subscribe(
       data => this.artists = data.artists.items
-    );
-    concertService.getConcerts("Stockholm", 'date').subscribe(
-      data => this.events = data.events.event
     );
   }
 
@@ -55,6 +52,10 @@ export class AppComponent {
 
   logout() {
     return this.authService.logout();
+  }
+
+  onSubmit(value: any) {
+    this.router.navigate(['/search', value.search]);
   }
 
 }

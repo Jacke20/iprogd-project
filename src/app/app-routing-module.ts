@@ -4,6 +4,7 @@ import { PageNotFoundComponent }   from './components/page-not-found/page-not-fo
 import { ConcertComponent }        from './components/concert/concert.component';
 import { UserComponent } 		       from './components/user/user.component';
 import { HomeComponent }           from './components/home/home.component';
+import { SearchComponent }         from './components/search/search.component';
 import { AuthGuard }               from './guards/auth.guard';
 import { AdminComponent }          from './components/admin/admin.component';
 
@@ -12,7 +13,9 @@ import { AdminComponent }          from './components/admin/admin.component';
 const appRoutes: Routes = [
   { path: 'concerts', component: ConcertComponent },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
+  { path: 'search/:location', component: SearchComponent },
   { path: 'home', component: HomeComponent },
+
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

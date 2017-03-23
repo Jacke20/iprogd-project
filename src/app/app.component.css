@@ -1,3 +1,11 @@
 div.nav-wrapper {
   margin: 0 20px 20px 20px;
 }
+
+nav .nav-wrapper form, nav .nav-wrapper form .input-field{
+  height: 100% !important;
+}
+
+input[type="search"] {
+  height: 64px !important; /* or height of nav */
+}
