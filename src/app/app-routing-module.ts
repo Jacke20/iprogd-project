@@ -7,14 +7,16 @@ import { HomeComponent }           from './components/home/home.component';
 import { SearchComponent }         from './components/search/search.component';
 import { AuthGuard }               from './guards/auth.guard';
 import { AdminComponent }          from './components/admin/admin.component';
+import { ArtistComponent }         from './components/artist/artist.component';
 
 
 
 const appRoutes: Routes = [
-  { path: 'concerts', component: ConcertComponent },
+  { path: 'concert', component: ConcertComponent },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   { path: 'search/:location', component: SearchComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'artist', component: ArtistComponent },
 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },

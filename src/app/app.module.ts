@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { ConcertComponent } from './components/concert/concert.component';
 import { UserComponent } from './components/user/user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ArtistComponent } from "./components/artist/artist.component"
+import { AlbumComponent } from "./components/album/album.component"
 
 // Guard imports
 import { AuthGuard } from './guards/auth.guard';
@@ -64,7 +66,9 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     TestDirective,
     TestPipe,
     AdminComponent,
-    SearchComponent
+    SearchComponent,
+    ArtistComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
