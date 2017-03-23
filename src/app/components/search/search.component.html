@@ -1,4 +1,4 @@
 <h5>Music events found in {{ searchTerm }}</h5>
 <ul>
-  <li *ngFor="let result of results; let i = index"><b>{{ result.title }}</b>, Venue: {{ result.venue_name }}, Date: {{ result.start_time }}</li>
+  <li *ngFor='let result of results'><b>{{ result.title }}</b>, Venue: {{ result.venue_name }}, Date: {{ result.start_time }}</li>
 </ul>

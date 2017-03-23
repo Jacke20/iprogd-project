@@ -9,7 +9,8 @@ import 'rxjs/add/operator/map';
 // users or concerts on multiple places.
 @Injectable()
 export class ConcertService {
-  private apiUrl = 'http://api.eventful.com/json/events/search?';  // URL to Eventful API
+  private baseUrl = 'http://api.eventful.com/json/events/search?';  // Base URL to Eventful API search
+  private apiUrl = '';
   private apiKey = '2t89BH4xkbpwCHzs'; // API Key
 
   private headers = new Headers();
@@ -20,11 +21,27 @@ export class ConcertService {
   // Access-Control-Allow-Credentials to true in options
   // date is an optional parameter
   getConcerts(location, sort_order = 'relevance', date = 'Future') {
-    this.apiUrl = this.apiUrl + 'q=music&location=' + location + '&date=' + date + '&sort_order=' + sort_order;
-    // Append app_key
-    this.apiUrl = this.apiUrl + '&app_key=' + this.apiKey;
+    this.apiUrl = this.baseUrl + 'q=music&location=' + location + '&date=' + date + '&sort_order=' + sort_order 
+    + '&app_key=' + this.apiKey;
     return this.http.get(this.apiUrl)
-    .map(res => res.json());
+    .map(res => res.json())
+    .catch(this.handleError);
   }
+
+  private handleError (error: Response | any) {
+    console.log("ERROR");
+    // TODO: Place error handling separately
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
+
 
 }

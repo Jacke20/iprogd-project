@@ -15,13 +15,18 @@ export class SearchComponent implements OnInit {
   searchTerm = '';
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
-    private route:ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.searchTerm = this.route.snapshot.params['location'];
-    this.concertService.getConcerts(this.searchTerm, 'date').subscribe(
-      data => this.results = data.events.event
-    );
+  ngOnInit() { 
+
+    this.route.params.subscribe(params => {
+      this.searchTerm = params['location'];
+
+      this.concertService.getConcerts(this.searchTerm, 'date').subscribe(
+        data => this.results = data.events ? data.events.event : []
+      );
+    });
+
   }
 
 }
