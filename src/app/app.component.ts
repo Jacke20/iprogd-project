@@ -32,13 +32,15 @@ export class AppComponent {
     this.user = authService.user;
 
     // TODO: Remove later
-    spotifyService.getAlbumsForArtist("0OdUWJ0sBjDrqHygGUXeCF");
+    spotifyService.getAlbumsForArtist("7FBDXY8U17aasVTH3rgxbS");
 
     // We have to call subscribe which lets us know when the request is finished since our
     // service methods return Observables and they use promises.
+    /*
     spotifyService.searchArtists("Bankroll fresh").subscribe(
-      data => this.artists = data.artists.items
+      data => console.log(data)
     );
+    */
   }
 
   // Global authentication methods

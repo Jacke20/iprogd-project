@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   { path: 'search/:location', component: SearchComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'artist', component: ArtistComponent },
+  { path: 'artist/:id', component: ArtistComponent },
 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },

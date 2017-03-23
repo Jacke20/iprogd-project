@@ -1,6 +1,6 @@
 <!-- <div [ngStyle]="{'background-image': 'url(' + photo + ')'}"></div> -->
 
-<h2>Name of artist</h2>
+<h2>{{ artist.name }}</h2>
 <!-- Card for general information about artist -->
 <div class="row">
 	<div class="col s12">
@@ -11,7 +11,7 @@
 			      Rating needs to be here as well</p>
 		    </div>
 		    <div class="card-action">
-		      <a href="#">Listen to ARTIST_NAME on Spotify</a>
+		      <a href="{{ artist.external_urls?.spotify }}">Listen to {{ artist.name }} on Spotify</a>
 		    </div>
 	    </div>
 	</div>
