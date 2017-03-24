@@ -1,53 +1,52 @@
 <div class="navbar-fixed">
-<nav id="main-nav">
-	<div class="nav-wrapper">
-		<a routerLink="/home" routerLinkActive="active" class="brand-logo center hide-on-med-and-down">Logo</a>
-		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse link"><i class="material-icons">menu</i></a>
-    <ul class="left">
-      <li><a routerLink="/concert" routerLinkActive="active">Concert</a></li>
-      <li><a routerLink="/artist/7FBDXY8U17aasVTH3rgxbS" routerLinkActive="active">ArtistTest</a></li>
-      <li>
-        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-          <div class="input-field">
-            <input id="search" type="search" name="search" required ngModel>
-            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-            <i class="material-icons">close</i>
-          </div>
-        </form>
-      </li>
-    </ul>
-    
-    
-		<ul class="right hide-on-med-and-down">
-		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
-      <li>
-        <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
-        <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
-       
-      </li>
-	  </ul>
-	  <ul class="side-nav" id="mobile-demo">
-      <li>
-        <form class="searchform">
-          <div class="input-field searchbar">
-            <input id="search" type="search" required>
-            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-            <i class="material-icons">close</i>
-          </div>
-        </form>
-      </li>
-		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
-		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
-      <li>
-        <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
-        <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
-      </li>
-    </ul>
- 	</div>
-</nav>
+  <nav id="main-nav">
+  	<div class="nav-wrapper">
+  		<a routerLink="/home" routerLinkActive="active" class="brand-logo center hide-on-med-and-down">Logo</a>
+  		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse link"><i class="material-icons">menu</i></a>
+      <ul class="left">
+        <li><a routerLink="/concert" routerLinkActive="active">Concert</a></li>
+        <li><a routerLink="/artist/7FBDXY8U17aasVTH3rgxbS" routerLinkActive="active">ArtistTest</a></li>
+        <li>
+          <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+            <div class="input-field">
+              <input id="search" type="search" name="search" required ngModel>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </li>
+      </ul>
+      
+      
+  		<ul class="right hide-on-med-and-down">
+  		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
+        <li>
+          <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
+          <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
+         
+        </li>
+  	  </ul>
+  	  <ul class="side-nav" id="mobile-demo">
+        <li>
+          <form class="searchform">
+            <div class="input-field searchbar">
+              <input id="search" type="search" required>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </li>
+  		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
+  		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
+        <li>
+          <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
+          <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
+        </li>
+      </ul>
+   	</div>
+  </nav>
 </div>
 
-<router-outlet name="home"></router-outlet>
 <div class="outer-outlet container">
   <router-outlet></router-outlet>
 </div>
