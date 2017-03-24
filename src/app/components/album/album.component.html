@@ -1,11 +1,11 @@
-<div class="col s12 m6">
+<div class="col s12 m6" *ngFor="let album of albums">
 	<div class="card horizontal">
 	  <div class="card-image">
-	    <img src="http://hw-img.datpiff.com/mcf7896d/Lil_Uzi_Vert_The_Perfect_Luv_Tape-front-large.jpg">
+	    <img src="{{ album.images[0].url }}">
 	  </div>
 	  <div class="card-stacked">
 	    <div class="card-content">
-	    	<span>Album title</span>
+	    	<span>{{ album.name }}</span>
 	      <p>List of tracks goes here</p>
 	    </div>
 	  </div>
