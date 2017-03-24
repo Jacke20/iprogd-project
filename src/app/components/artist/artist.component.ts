@@ -12,6 +12,7 @@ import { ConcertService }    from "../../services/concert.service";
 })
 export class ArtistComponent implements OnInit {
   artist = {};
+  topTracks = [];
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
 
@@ -19,6 +20,14 @@ export class ArtistComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.spotifyService.getArtistInformation(params['id']).subscribe(
         data => this.artist = data
+      );
+
+      this.spotifyService.getTopTracksByArtist(params['id']).subscribe(
+        data => this.topTracks = data.tracks
+      );
+
+      this.spotifyService.getTopTracksByArtist(params['id']).subscribe(
+        data => console.log(data)
       );
 
 

@@ -19,8 +19,22 @@ export class SpotifyService{
     this.headers.append('client_secret', this.client_secret);
   }
 
+  getAlbumsForArtistSimplified(artist_id) {
+    this.apiUrl = 'https://api.spotify.com/v1/artists/' + artist_id + '/albums';
+    return this.http.get(this.apiUrl, this.headers)
+    .map(res => res.json())
+    .catch(this.handleError);
+  }
+
   getAlbumsForArtist(artist_id) {
     this.apiUrl = 'https://api.spotify.com/v1/artists/' + artist_id + '/albums';
+    return this.http.get(this.apiUrl, this.headers)
+    .map(res => res.json())
+    .catch(this.handleError);
+  }
+
+  getTopTracksByArtist(artist_id) {
+    this.apiUrl = 'https://api.spotify.com/v1/artists/' + artist_id + '/top-tracks?country=SE';
     return this.http.get(this.apiUrl, this.headers)
     .map(res => res.json())
     .catch(this.handleError);
