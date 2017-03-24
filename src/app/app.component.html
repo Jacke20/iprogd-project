@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
   <nav id="main-nav">
   	<div class="nav-wrapper">
-  		<a routerLink="/home" routerLinkActive="active" class="brand-logo center hide-on-med-and-down">Logo</a>
+  		<a routerLink="home" routerLinkActive="active" class="brand-logo center hide-on-med-and-down">Logo</a>
   		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse link"><i class="material-icons">menu</i></a>
       <ul class="left">
         <li><a routerLink="/concert" routerLinkActive="active">Concert</a></li>
@@ -47,9 +47,8 @@
   </nav>
 </div>
 
-<div class="outer-outlet container">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
+
 
 <!-- Simultaneously apply the directive and set the color in the same attribute (Highlighted with parent component's color) -->
 <!-- async pipe allows us to bind our templates directly to values that arrive asynchronously. -->
