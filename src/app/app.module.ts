@@ -34,6 +34,7 @@ import { TestDirective } from './directives/test.directive';
 import { TestPipe } from './pipes/test.pipe';
 import { AdminComponent } from './components/admin/admin.component';
 import { SearchComponent } from './components/search/search.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
@@ -68,7 +69,8 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     AdminComponent,
     SearchComponent,
     ArtistComponent,
-    AlbumComponent
+    AlbumComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

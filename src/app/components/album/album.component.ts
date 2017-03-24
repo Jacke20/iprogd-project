@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute }    from '@angular/router';
 import { SpotifyService }    from "../../services/spotify.service";
 
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
@@ -15,7 +17,7 @@ import { SpotifyService }    from "../../services/spotify.service";
 export class AlbumComponent implements OnInit {
   albums = [];
 
-  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
+  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

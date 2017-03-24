@@ -40,6 +40,13 @@ export class SpotifyService{
     .catch(this.handleError);
   }
 
+  getTrack(track_id) {
+    this.apiUrl = 'https://api.spotify.com/v1/tracks/' + track_id;
+    return this.http.get(this.apiUrl, this.headers)
+    .map(res => res.json())
+    .catch(this.handleError); 
+  }
+
   getArtistInformation(artist_id) {
     this.apiUrl = 'https://api.spotify.com/v1/artists/' + artist_id;
     return this.http.get(this.apiUrl, this.headers)
