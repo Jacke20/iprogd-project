@@ -1,6 +1,7 @@
 <!-- <div [ngStyle]="{'background-image': 'url(' + photo + ')'}"></div> -->
 
 <h2>{{ artist.name }}</h2>
+<img class="main-picture" src="{{ artist.images && artist.images[1].url }}" alt="">
 <!-- Card for general information about artist -->
 <div class="row">
 	<div class="col s12">
