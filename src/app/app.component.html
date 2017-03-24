@@ -1,6 +1,7 @@
+<div class="navbar-fixed">
 <nav id="main-nav">
 	<div class="nav-wrapper">
-		<a class="brand-logo center hide-on-med-and-down">Logo</a>
+		<a routerLink="/home" routerLinkActive="active" class="brand-logo center hide-on-med-and-down">Logo</a>
 		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse link"><i class="material-icons">menu</i></a>
     <ul class="left">
       <li><a routerLink="/concert" routerLinkActive="active">Concert</a></li>
@@ -44,7 +45,9 @@
     </ul>
  	</div>
 </nav>
+</div>
 
+<router-outlet name="home"></router-outlet>
 <div class="outer-outlet container">
   <router-outlet></router-outlet>
 </div>
