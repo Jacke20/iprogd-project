@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AppRoutingModule } from './app-routing-module';
 import { MaterializeModule } from 'angular2-materialize';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -80,7 +81,10 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     JsonpModule,
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     AppRoutingModule,
-    MaterializeModule
+    MaterializeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyChiF662GOUy0E9_ncWL4Ekq-y1luWh6bw'
+    })
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
