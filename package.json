@@ -22,6 +22,7 @@
     "@angular/router": "^3.4.0",
     "angular2-materialize": "^6.7.1",
     "angularfire2": "2.0.0-beta.8",
+    "animate.css": "^3.5.2",
     "core-js": "^2.4.1",
     "firebase": "^3.0.0",
     "materialize-css": "^0.98.0",
