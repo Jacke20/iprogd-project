@@ -1,7 +1,10 @@
 img.main-picture {
   width: 100%;
+  position: fixed;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 div.album-card {
-  height: 400px;
+  height: auto;
 }
