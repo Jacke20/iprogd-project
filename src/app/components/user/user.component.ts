@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -10,8 +11,12 @@ import { UserService } from '../../services/user.service';
 })
 export class UserComponent implements OnInit {
 
+  user = this.authService.user;
+
   users: FirebaseListObservable<any>;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authService: AuthService) { 
+
+  }
 
   getUsers(): void {
     this.users = this.userService.getUsers();
@@ -22,6 +27,7 @@ export class UserComponent implements OnInit {
   // We used the ngOnInit Lifecycle Hook to get users when our AppComponent activates.
   ngOnInit(): void {
     this.getUsers();
+    console.log(this.user);
   }
 
 }

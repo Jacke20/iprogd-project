@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
 import { Observable, Subject} from "rxjs/Rx";
+import { AuthService } from './auth.service';
+
 
 // Services provide things that we want to use on several locations in our app. For example we might want to use a list of
 // users or concerts on multiple places (in multiple components).
 @Injectable()
 export class UserService {
   users: FirebaseListObservable<any>;
-  constructor(af: AngularFire) { 
+  constructor(af: AngularFire, auth: AuthService) {
     this.users = af.database.list('users');
   }
 

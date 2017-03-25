@@ -1,5 +1,46 @@
-<ul>
-  <li class="text" *ngFor="let user of users | async">
-    <b>{{user.$key}}</b>&nbsp;<span>{{user.description}}</span>
-  </li>
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<!-- some user info -->
+			<div class="card horizontal">
+				<div class="card-image">
+					<img src="{{ user.google.photoURL }}">
+				</div>
+				<div class="card-stacked">
+					<div class="card-content">
+						<span class="card-title">{{ user.google.displayName }}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<!-- favorites -->
+		<div class="col s6">
+			<div class="card">
+				<div class="card-content">
+					<span class="card-title">Favorites</span>
+					<ul>
+						<li class="text">Favorites here</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- reviews -->
+		<div class="col s6">
+			<div class="card">
+				<div class="card-content">
+					<span class="card-title">Reviews</span>
+					<ul>
+						<li class="text">Reviews here</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<ul>
+			<li class="text" *ngFor="let user of users | async">
+				<b>{{user.$key}}</b>&nbsp;<span>{{user.description}}</span>
+			</li>
+		</ul>
+	</div>
+</div>
