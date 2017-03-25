@@ -13,6 +13,8 @@ import { ConcertService }    from "../../services/concert.service";
 export class ArtistComponent implements OnInit {
   artist = {};
   topTracks = [];
+  audios = [];
+  playingID: number;
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
 
@@ -39,13 +41,40 @@ export class ArtistComponent implements OnInit {
 
   playSong(id) {
     var audio = new Audio();
+    this.audios.push(audio);
     audio.src = document.getElementById(id).getAttribute('src');
     audio.load();
-    audio.play();
+    let playing = this.isPlaying(this.audios);
+    var playButton = document.getElementById('p' + id);
+    var playingPlayButton = document.getElementById('p' + this.playingID);
+    if(!playing) {
+      this.playingID = id;
+      audio.play();
+      playButton.innerHTML = 'pause_circle_outline';
+    } else if (audio.src == playing.src) {
+      this.playingID = null;
+      playing.pause();
+      playButton.innerHTML = 'play_circle_outline';
+    } else {
+      this.playingID = id;
+      playingPlayButton.innerHTML = 'play_circle_outline';
+      playButton.innerHTML = 'pause_circle_outline';
+      playing.pause();
+      audio.play();
+    }
   }
 
   pauseSong(id) {
     // TODO
+  }
+
+  isPlaying(audios) {
+    for(let i = 0; i < audios.length; i++) {
+      if(!audios[i].paused) {
+        return audios[i];
+      }
+    }
+    return null;
   }
 
 }

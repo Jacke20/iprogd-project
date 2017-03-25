@@ -43,7 +43,8 @@
             <source type="audio/mpeg" src="{{ track.preview_url }}" [attr.id]="i">
           </audio>
           <div>{{ track.name }}
-          <i class="material-icons right preview-play" (click)="playSong(i)">play_circle_outline</i></div>
+            <i class="material-icons right preview-play" [attr.id]="'p' + i" (click)="playSong(i)">play_circle_outline</i>
+          </div>
         </li>
       </ul>
     </div>
