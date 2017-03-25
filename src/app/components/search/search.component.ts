@@ -22,10 +22,16 @@ export class SearchComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.searchTerm = params['location'];
 
-      this.concertService.getConcerts(this.searchTerm, 'date').subscribe(
+      this.concertService.getConcert(this.searchTerm).subscribe(
+        data => this.results = data.Events);
+/*
+      this.concertService.getConcert(this.searchTerm, 'date').subscribe(
         data => this.results = data.events ? data.events.event : []
       );
+      */
     });
+ 
+
 
   }
 

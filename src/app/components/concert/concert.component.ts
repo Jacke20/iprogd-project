@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ConcertService }    from '../../services/concert.service';
+
 
 @Component({
   selector: 'app-concert',
@@ -10,7 +12,9 @@ export class ConcertComponent implements OnInit {
 	lat: number = 51.678418; // byt dessa till koordinater för själva eventet
 	lng: number = 7.809007;
 
-  constructor() { }
+  constructor(private concertService: ConcertService) {
+  	
+  }
 
   ngOnInit() {
   }
