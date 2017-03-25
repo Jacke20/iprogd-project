@@ -21,3 +21,7 @@ ul.fade {
 div.album-card {
   height: auto;
 }
+
+i.preview-play {
+  cursor: pointer;
+}

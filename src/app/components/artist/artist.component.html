@@ -38,11 +38,12 @@
     <div class="col s12">
       <ul class="collection with-header card fade">
         <li class="collection-header"><h4>Top tracks</h4></li>
-        <li *ngFor="let track of topTracks" class="collection-item">
-          <audio id="preview1">
-            <source type="audio/mpeg" src="{{ track.preview_url }}">
+        <li *ngFor="let track of topTracks; let i = index" class="collection-item">
+          <audio>
+            <source type="audio/mpeg" src="{{ track.preview_url }}" [attr.id]="i">
           </audio>
-          <div>{{ track.name }}<a href="{{ track.preview_url }}" target="_blank" class="secondary-content"><i class="material-icons" onclick="document.getElementById('preview1').play()">play_circle_outline</i></a></div>
+          <div>{{ track.name }}
+          <i class="material-icons right preview-play" (click)="playSong(i)">play_circle_outline</i></div>
         </li>
       </ul>
     </div>

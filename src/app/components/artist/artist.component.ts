@@ -37,4 +37,15 @@ export class ArtistComponent implements OnInit {
     });
   }
 
+  playSong(id) {
+    var audio = new Audio();
+    audio.src = document.getElementById(id).getAttribute('src');
+    audio.load();
+    audio.play();
+  }
+
+  pauseSong(id) {
+    // TODO
+  }
+
 }

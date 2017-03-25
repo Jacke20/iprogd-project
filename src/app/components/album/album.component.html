@@ -1,4 +1,4 @@
-<div class="col s12 m4" *ngFor="let album of albums">
+<div class="col s12 m6" *ngFor="let album of albums">
 	<div class="card hoverable">
 		<div class="card-image waves-effect waves-block waves-light">
 			<img class="activator" src="{{ album.images[0].url }}">
@@ -10,7 +10,7 @@
 		</div>
 		<div class="card-reveal">
 			<span class="card-title grey-text text-darken-4">{{ album.name }}<i class="material-icons right">close</i></span>
-			<iframe [src]="'https://embed.spotify.com/?uri=' + album.uri | safe" width="340" height="350" frameborder="0" allowtransparency="true"></iframe>
+			<iframe class="album-audio" [src]="'https://embed.spotify.com/?uri=' + album.uri | safe" width="340" height="350" frameborder="0" allowtransparency="true"></iframe>
 		</div>
 	</div>
 </div>
