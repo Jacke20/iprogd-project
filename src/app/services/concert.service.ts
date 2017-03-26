@@ -19,12 +19,30 @@ export class ConcertService {
 
   constructor(private http: Http) { }
 
-  getConcert(id: string) {
+  // Jambase methods THIS API SUCKS 50 limit each day nice Adrian
+
+  getConcertByArtist(id: string) {
     let url = "http://api.jambase.com/events?artistId=2698&page=0&api_key=d67b3bq3jp28mwbtze4n5avu";
     return this.http.get(url)
       .map(res => res.json())
       .catch(this.handleError);
   }
+
+  getConcertsByVenueId(id: string) {
+    let url = "http://api.jambase.com/events?venueId=" + id + "&page=0&api_key=" + this.JAMBASEAPIKEY;
+    return this.http.get(url)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getVenue(searchTerm: string) {
+    let url = "http://api.jambase.com/venues?name=" + searchTerm + "&page=0&api_key=" + this.JAMBASEAPIKEY;
+    return this.http.get(url)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  // Eventful methods
 
   // To get CORS to work, install Moesif Origin & CORS Changer plugin for chrome and set 
   // Access-Control-Allow-Credentials to true in options

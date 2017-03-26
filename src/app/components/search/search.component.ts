@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute }    from '@angular/router';
+import { Loading }           from '../../classes/loading';
 
 import { SpotifyService }    from "../../services/spotify.service";
 import { ConcertService }    from "../../services/concert.service";
@@ -10,26 +11,47 @@ import { ConcertService }    from "../../services/concert.service";
   styleUrls: ['./search.component.css'],
   providers: [SpotifyService, ConcertService] // TODO: Remove SpotifyService
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent extends Loading implements OnInit {
   results = [];
   searchTerm = '';
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { 
+    super(true);
+  }
 
   ngOnInit() { 
 
+
     this.route.params.subscribe(params => {
+      this.standby();
       this.searchTerm = params['location'];
 
-      this.concertService.getConcert(this.searchTerm).subscribe(
-        data => this.results = data.Events);
 /*
-      this.concertService.getConcert(this.searchTerm, 'date').subscribe(
-        data => this.results = data.events ? data.events.event : []
+       this.concertService.getVenue(this.searchTerm).subscribe(
+        data => {
+          var id = data.Venues[0].Id;
+          this.concertService.getConcertsByVenueId(id).subscribe(
+            data => {
+              this.results = data.Events ? data.Events : []
+              this.ready();
+            }
+          );
+        }
       );
+
       */
+
+       this.concertService.getConcerts(this.searchTerm, 'date').subscribe(
+      data => {
+        this.results = data.events ? data.events.event : [];
+        this.ready();
+      }
+    );
+      
     });
+    
+
  
 
 

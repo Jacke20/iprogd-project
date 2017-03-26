@@ -1,24 +1,32 @@
-<div class="container">
-  <h5>Music events found for: {{ searchTerm }}</h5>
-  <div class="row">
-    <div class="col s12 m6 l3" *ngFor='let result of results'>
-      <div class="card">
-          <div class="card-image">
-            <img src="images/sample-1.jpg" alt="TODO">
-            <!--<span class="card-title">{{ result.title }}</span>-->
+<div [ngSwitch]="loading">
+    <div *ngSwitchCase="false">
+      <div class="container">
+        <h5>Music events found for: {{ searchTerm }}</h5>
+        <div class="row">
+          <div class="col s12 m6 l3" *ngFor='let result of results'>
+            <div class="card">
+                <div class="card-image">
+                  <img src="images/sample-1.jpg" alt="TODO">
+                  <!--<span class="card-title">{{ result.title }}</span>-->
+                </div>
+                <div class="card-content">
+                  <p>Title: {{ result.title }}</p>
+                  <p>Location: {{ result.venu_name }}, {{ result.city_name }}</p>
+                  <p>Date: {{ result.start_time }}</p>
+                  <p>Artist: Kan inte få fram..</p>
+                </div>
+                <div class="card-action valign">
+                  <a href="#">Read more</a>
+                </div>    
+            </div>
           </div>
-          <div class="card-content">
-            <p>Title: {{ result.title }}</p>
-            <p>Location: {{ result.Venue.Name }}, {{ result.Venue.City }}</p>
-            <p>Date: {{ result.Date }}</p>
-            <p>Artist: Kan inte få fram..</p>
-          </div>
-          <div class="card-action valign">
-            <a href="#">Read more</a>
-          </div>    
+        </div>
       </div>
     </div>
-  </div>
+    <div *ngSwitchCase="true">
+      <app-loading-indicator></app-loading-indicator>
+    </div>
 </div>
+
 
 
