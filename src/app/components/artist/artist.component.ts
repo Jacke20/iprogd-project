@@ -21,19 +21,26 @@ export class ArtistComponent extends Loading implements OnInit {
   playingID: number;
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService, private reviewService: ReviewService) { 
-    super(true);
+    super(true, 3);
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      // Start 2 loading tasks
+      this.add_loading(0);
+      this.add_loading(1);
+      this.add_loading(2);
       this.spotifyService.getArtistInformation(params['id']).subscribe(
-        data => this.artist = data
+        data => {
+          this.artist = data;
+          this.loading_ready(0);
+        }
       );
 
       this.spotifyService.getTopTracksByArtist(params['id']).subscribe(
         data => {
           this.topTracks = data.tracks;
-          this.ready();
+          this.loading_ready(1);
         }  
       );
       /*
@@ -46,6 +53,7 @@ export class ArtistComponent extends Loading implements OnInit {
       this.reviewService.getReviewsForArtist(params['id']).subscribe(
         data => {
           this.reviews = data;
+          this.loading_ready(2);
           console.log("MOMMAAAAAA!!!!!");
           console.log(data);
         });
