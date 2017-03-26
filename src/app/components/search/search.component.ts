@@ -13,6 +13,7 @@ import { ConcertService }    from "../../services/concert.service";
 })
 export class SearchComponent extends Loading implements OnInit {
   results = [];
+  artists = [];
   searchTerm = '';
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
@@ -41,13 +42,22 @@ export class SearchComponent extends Loading implements OnInit {
       );
 
       */
+     
+     this.spotifyService.searchArtists(this.searchTerm).subscribe(
+        data => {
+          this.artists = data.artists.items;
+          console.log(data.artists);
+        }
+      );
 
-       this.concertService.getConcerts(this.searchTerm, 'date').subscribe(
-      data => {
-        this.results = data.events ? data.events.event : [];
-        this.ready();
-      }
-    );
+      this.concertService.getConcerts(this.searchTerm, 'date').subscribe(
+        data => {
+          this.results = data.events ? data.events.event : [];
+          this.ready();
+        }
+      );
+
+
       
     });
     
