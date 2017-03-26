@@ -3,6 +3,7 @@ import { ActivatedRoute }    from '@angular/router';
 
 import { SpotifyService }    from "../../services/spotify.service";
 import { ConcertService }    from "../../services/concert.service";
+import { ReviewService } from '../../services/review.service';
 
 import { Loading }           from "../../classes/loading";
 
@@ -10,15 +11,16 @@ import { Loading }           from "../../classes/loading";
   selector: 'app-artist',
   templateUrl: './artist.component.html',
   styleUrls: ['./artist.component.css'],
-  providers: [SpotifyService, ConcertService]
+  providers: [SpotifyService, ConcertService, ReviewService]
 })
 export class ArtistComponent extends Loading implements OnInit {
   artist = {};
   topTracks = [];
   audios = [];
+  reviews = [];
   playingID: number;
 
-  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { 
+  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService, private reviewService: ReviewService) { 
     super(true);
   }
 
@@ -34,6 +36,18 @@ export class ArtistComponent extends Loading implements OnInit {
           this.ready();
         }  
       );
+      /*
+      this.reviewService.getReviewsForArtist(params['id']).subscribe(
+        data => {
+          this.reviews = data.reviews;
+        }
+      );
+      */
+      this.reviewService.getReviewsForArtist(params['id']).subscribe(
+        data => {
+          console.log("MOMMAAAAAA!!!!!");
+          console.log(data);
+        });
 
       /*
       this.spotifyService.getTopTracksByArtist(params['id']).subscribe(
