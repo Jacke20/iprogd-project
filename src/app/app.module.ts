@@ -36,6 +36,7 @@ import { TestPipe } from './pipes/test.pipe';
 import { AdminComponent } from './components/admin/admin.component';
 import { SearchComponent } from './components/search/search.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
@@ -71,7 +72,8 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
     SearchComponent,
     ArtistComponent,
     AlbumComponent,
-    SafePipe
+    SafePipe,
+    LoadingIndicatorComponent
   ],
   imports: [
     BrowserModule,

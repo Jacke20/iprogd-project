@@ -4,19 +4,23 @@ import { ActivatedRoute }    from '@angular/router';
 import { SpotifyService }    from "../../services/spotify.service";
 import { ConcertService }    from "../../services/concert.service";
 
+import { Loading }           from "../../classes/loading";
+
 @Component({
   selector: 'app-artist',
   templateUrl: './artist.component.html',
   styleUrls: ['./artist.component.css'],
   providers: [SpotifyService, ConcertService]
 })
-export class ArtistComponent implements OnInit {
+export class ArtistComponent extends Loading implements OnInit {
   artist = {};
   topTracks = [];
   audios = [];
   playingID: number;
 
-  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
+  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { 
+    super(true);
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -25,17 +29,20 @@ export class ArtistComponent implements OnInit {
       );
 
       this.spotifyService.getTopTracksByArtist(params['id']).subscribe(
-        data => this.topTracks = data.tracks
+        data => {
+          this.topTracks = data.tracks;
+          this.ready();
+        }  
       );
 
+      /*
       this.spotifyService.getTopTracksByArtist(params['id']).subscribe(
         data => console.log(data)
       );
-
-
        this.spotifyService.getArtistInformation(params['id']).subscribe(
         data => console.log(data)
       );
+      */
     });
   }
 
