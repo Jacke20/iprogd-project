@@ -5,7 +5,7 @@ import { SpotifyService }    from "../../services/spotify.service";
 import { ConcertService }    from "../../services/concert.service";
 import { ReviewService } from '../../services/review.service';
 
-import { Loading }           from "../../classes/loading";
+import { Loading }              from "../../classes/loading";
 
 @Component({
   selector: 'app-artist',
@@ -97,6 +97,10 @@ export class ArtistComponent extends Loading implements OnInit {
   pauseSong(id) {
     // TODO
   }
+
+  updateRating(new_rating) {
+    console.log(new_rating);
+  } 
 
   isPlaying(audios) {
     for(let i = 0; i < audios.length; i++) {

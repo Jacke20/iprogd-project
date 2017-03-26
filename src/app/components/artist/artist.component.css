@@ -25,3 +25,7 @@ div.album-card {
 i.preview-play {
   cursor: pointer;
 }
+
+span.rating {
+  display: inline-block;
+}

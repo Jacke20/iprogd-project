@@ -8,6 +8,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AppRoutingModule } from './app-routing-module';
 import { MaterializeModule } from 'angular2-materialize';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { StarRatingModule } from 'angular-star-rating/src/star-rating.module';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -77,6 +78,7 @@ database().ref().on('value', snapshot => console.log(snapshot.val()));
   ],
   imports: [
     BrowserModule,
+    StarRatingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
