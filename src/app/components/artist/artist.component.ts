@@ -39,12 +39,13 @@ export class ArtistComponent extends Loading implements OnInit {
       /*
       this.reviewService.getReviewsForArtist(params['id']).subscribe(
         data => {
-          this.reviews = data.reviews;
+          this.reviews = data;
         }
-      );
-      */
+      );*/
+
       this.reviewService.getReviewsForArtist(params['id']).subscribe(
         data => {
+          this.reviews = data;
           console.log("MOMMAAAAAA!!!!!");
           console.log(data);
         });

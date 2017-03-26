@@ -17,7 +17,24 @@
                 <span class="card-title"><b>About</b></span>
                 <p>General information about artist goes here.</p>
                 <h5>Live performance reviews</h5>
-                <p>{{ reviews.review_count }}</p>
+                <div *ngFor="let review of reviews; let i=index">
+                	<div *ngIf="i<3">
+                		<!-- Card for one review -->
+                		<div class="row">
+		                  <div class="col s12">
+		                    <div class="card grey lighten-3">
+		                      <div class="card-content black-text">
+		                        <span class="card-title">{{ review.title }}</span>
+		                        <p>Score: {{ review.rating }}/5</p>
+		                        <p>{{ review.content }}</p>
+		                        <p>Review written by: {{ review.reviewer }}</p>
+		                      </div>
+		                    </div>
+	                  	</div>
+	                  </div>
+	                </div>
+                </div>
+               <!-- <p>There are {{ reviews[0]?.content }} reviews in dis bitch</p> -->
               </div>
               <div class="card-action">
                 <a href="{{ artist.external_urls?.spotify }}" target="_blank">Listen to {{ artist.name }} on Spotify</a>
