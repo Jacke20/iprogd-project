@@ -18,15 +18,18 @@
                 <p>General information about artist goes here.</p>
                 <h5>Live performance reviews</h5>
                 <div *ngFor="let review of reviews; let i=index">
-                	<div *ngIf="i<3">
+                	<div *ngIf="i<3"> <!-- We only show the 3 first reviews -->
                 		<!-- Card for one review -->
                 		<div class="row">
 		                  <div class="col s12">
 		                    <div class="card grey lighten-3">
 		                      <div class="card-content black-text">
 		                        <span class="card-title">{{ review.title }}</span>
-		                        <p>Score: {{ review.rating }}/5</p>
-		                        <p>{{ review.content }}</p>
+		                        <p><b>Score:</b> {{ review.rating }}/5</p>
+		                        <div *ngIf="review.content!=null">
+		                        	<p><i> "{{ review.content }}"</i></p>
+		                        </div>
+		                        <br>
 		                        <p>Review written by: {{ review.reviewer }}</p>
 		                      </div>
 		                    </div>
