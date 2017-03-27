@@ -108,8 +108,16 @@ export class ArtistComponent extends Loading implements OnInit {
 
   updateRating(new_rating) {
     this.showWriteReview = true;
-    console.log(new_rating);
+    console.log("haha " + JSON.stringify(new_rating));
   } 
+
+  hideWriteReview() {
+    this.showWriteReview = false;
+  }
+
+  onSubmitReview(value: any) {
+    console.log(value);
+  }
 
   isPlaying(audios) {
     for(let i = 0; i < audios.length; i++) {

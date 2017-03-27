@@ -29,22 +29,22 @@
                 <!-- Card for form used for writing reviews -->
                 <div *ngIf="showWriteReview">
                   <div class="row">
-                    <form class="col s12">
+                    <form #reviewForm="ngForm" (ngSubmit)="onSubmitReview(reviewForm.value)" class="col s12">
                       <div class="row">
                         <div class="input-field col s6">
-                          <input id="review_title" type="text" data-length="20"/>
+                          <input id="review_title" name="review_title" type="text" data-length="20" required ngModel>
                           <label for="review_title">Title of review (Max 20 characters)</label>
                         </div>
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-                          <textarea id="review_text" class="materialize-textarea" data-length="160"></textarea>
+                          <textarea id="review_text" name="review_text" class="materialize-textarea" data-length="160" required ngModel></textarea>
                           <label for="review_text">Write review (Max 160 characters)</label>
                         </div>
                       </div>
                       <div class="row">
-                        <button class="btn waves-effect waves-light" type="submit" name="submit_review">Submit
-                        </button>
+                        <a class="waves-effect waves-light btn" (click)="hideWriteReview($event)">Cancel</a>
+                        <button class="btn waves-effect waves-light" type="submit" name="submit_review">Submit</button>
                       </div>
                     </form>
                   </div>
