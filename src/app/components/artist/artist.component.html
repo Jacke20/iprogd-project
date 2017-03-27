@@ -21,6 +21,7 @@
                   <star-rating-comp
                          [size]="'large'"
                          [labelText]="'Hej'"
+                         [rating] = "averageScore"
                          (onClick)="updateRating($event)"
                   >
                   </star-rating-comp>
@@ -37,7 +38,7 @@
                               {{ review.title }} 
                               <span class="rating right">
                                 <star-rating-comp
-                                       [size]="'large'"
+                                       [size]="'medium'"
                                        [showHalfStars]="true"
                                        [readOnly]="true"
                                        [rating]="review.rating"

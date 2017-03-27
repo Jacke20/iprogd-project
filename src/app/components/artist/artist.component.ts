@@ -18,6 +18,7 @@ export class ArtistComponent extends Loading implements OnInit {
   topTracks = [];
   audios = [];
   reviews = [];
+  averageScore: number; // Rounded average score of the artist
   playingID: number;
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService, private reviewService: ReviewService) { 
@@ -53,8 +54,13 @@ export class ArtistComponent extends Loading implements OnInit {
       this.reviewService.getReviewsForArtist(params['id']).subscribe(
         data => {
           this.reviews = data;
+          this.averageScore = 0;
+          for (let i = 0; i < data.length; i++) {
+            this.averageScore += Number(data[i].rating);
+          }
+          this.averageScore = Math.round(this.averageScore/data.length);
           this.loading_ready(2);
-          console.log("MOMMAAAAAA!!!!!");
+          console.log("REVIEWS::");
           console.log(data);
         });
 
