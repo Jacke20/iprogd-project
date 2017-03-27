@@ -27,6 +27,7 @@ export class UserComponent implements OnInit {
   // We used the ngOnInit Lifecycle Hook to get users when our AppComponent activates.
   ngOnInit(): void {
     this.getUsers();
+    console.log("FUCKASSBITCH");
     console.log(this.user);
   }
 

@@ -4,6 +4,7 @@ import { ActivatedRoute }    from '@angular/router';
 import { SpotifyService }    from "../../services/spotify.service";
 import { ConcertService }    from "../../services/concert.service";
 import { ReviewService } from '../../services/review.service';
+import { AuthService } from "../../services/auth.service";
 
 import { Loading }              from "../../classes/loading";
 
@@ -14,6 +15,9 @@ import { Loading }              from "../../classes/loading";
   providers: [SpotifyService, ConcertService, ReviewService]
 })
 export class ArtistComponent extends Loading implements OnInit {
+  // Om du lyckas få det att fungera med bara userInfo = {} så go right ahead
+  // Lägger in dummyvärden som skrivs över på init för att dis shit e dumb
+  userInfo = {uid: "-1", displayName: "ha"};
   artist = {};
   topTracks = [];
   audios = [];
@@ -21,14 +25,25 @@ export class ArtistComponent extends Loading implements OnInit {
   showWriteReview: boolean;
   averageScore: number; // Rounded average score of the artist
   playingID: number;
+  userRating: number; // the score that the current user has given the artist
+  artistID: number;
 
-  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService, private reviewService: ReviewService) { 
-    super(true, 3);
+  constructor(private route: ActivatedRoute, private spotifyService: SpotifyService,
+    private reviewService: ReviewService, private authService: AuthService) {
+      super(true, 3);
   }
 
   ngOnInit() {
     this.showWriteReview = false; // Not shown by default
+
+    this.authService.af.auth.subscribe(auth => {
+      // kan inte sätta this.user = auth eftersom den INSISTERAR att user inte har ett "google"-fält
+      // så jag tar bara fram det jag behöver like dis.
+      this.userInfo = {uid: auth.uid, displayName: auth.google.displayName};
+    });
+
     this.route.params.subscribe(params => {
+      this.artistID = params['id'];
       // Start 2 loading tasks
       this.add_loading(0);
       this.add_loading(1);
@@ -61,9 +76,8 @@ export class ArtistComponent extends Loading implements OnInit {
             this.averageScore += Number(data[i].rating);
           }
           this.averageScore = Math.round(this.averageScore/data.length);
+          // TODO, check if user has already rated artist and use that as userRating.
           this.loading_ready(2);
-          console.log("REVIEWS::");
-          console.log(data);
         });
 
       /*
@@ -107,16 +121,40 @@ export class ArtistComponent extends Loading implements OnInit {
   }
 
   updateRating(new_rating) {
+    this.userRating = new_rating.rating;
     this.showWriteReview = true;
-    console.log("haha " + JSON.stringify(new_rating));
   } 
 
   hideWriteReview() {
+    // reset back to average and hide if user cancels review
+    this.userRating = 0;
     this.showWriteReview = false;
   }
 
   onSubmitReview(value: any) {
-    console.log(value);
+    // If there are no reviews we must add the review as the first for that artist.
+    let reviewObject = {};
+    if (this.reviews.length != 0) {
+      // Have to create object this way to be able to use variables as keys.
+      let reviewObjectInner = {};
+      reviewObjectInner[this.userInfo.uid] = {
+        content: value.review_text,
+        rating: this.userRating,
+        reviewer: this.userInfo.displayName,
+        title: value.review_title
+      };
+      reviewObject[this.artistID] = reviewObjectInner;
+
+    } else {
+      reviewObject[this.userInfo.uid] = {
+          content: value.review_text,
+          rating: this.userRating,
+          reviewer: this.userInfo.displayName,
+          title: value.review_title
+        }
+    }
+    console.log("HAHAHAA");
+    console.log(reviewObject);
   }
 
   isPlaying(audios) {
