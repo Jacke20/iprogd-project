@@ -12,5 +12,11 @@ export class ReviewService {
   		this.reviews = this.af.database.list('reviews/' + artist_id);
   		return this.reviews;
  	} 
-
+ 	
+ 	// Use this too add a review to an artist. Will replace reviews if a user
+ 	// already has a review for that artist in the BD.
+ 	addReviewForArtist(artistID, objectToAdd): void {
+ 		const items = this.af.database.list('reviews');
+ 		items.update(artistID, objectToAdd);
+ 	}
 }
