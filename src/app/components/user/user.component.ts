@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -12,14 +12,38 @@ import { AuthService } from '../../services/auth.service';
 export class UserComponent implements OnInit {
 
   user = this.authService.user;
-
+  userId = this.authService.userId;
+  userInfo: FirebaseListObservable<any>;
+  reviews: FirebaseListObservable<any>;
   users: FirebaseListObservable<any>;
-  constructor(private userService: UserService, private authService: AuthService) { 
+  constructor(private userService: UserService, private authService: AuthService, private angularFire: AngularFire) { 
 
   }
 
   getUsers(): void {
     this.users = this.userService.getUsers();
+  }
+
+  getUserInfo(): void {
+    this.userInfo = this.angularFire.database.list('users/' + this.userId, { preserveSnapshot: true });
+    this.userInfo
+      .subscribe(snapshots => {
+        snapshots.forEach(snapshot => {
+          if(snapshot.val().length > 0) {
+            switch (snapshot.key) {
+              case "reviews":
+                this.reviews = snapshot.val();
+                break;
+              case "favorites":
+                //code
+                break;
+              default:
+                // code...
+                break;
+            }
+          }
+        });
+    });
   }
 
   // ngOnInit used to keep complex logic out of the constructor. There are other ng methods for things like changes etc.
@@ -28,6 +52,9 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
     console.log(this.user);
+    this.getUserInfo();
+    console.log(this.reviews);
   }
+
 
 }

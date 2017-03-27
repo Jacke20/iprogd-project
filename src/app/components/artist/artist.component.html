@@ -27,9 +27,8 @@
                   </star-rating-comp>
                 </span>
                 </h5>
-                <div *ngFor="let review of reviews; let i=index">
-                	<div *ngIf="i<3"> <!-- We only show the 3 first reviews -->
-                		<!-- Card for one review -->
+                <div *ngFor="let review of reviews | async">
+                    {{ review | json}}
                 		<div class="row">
 		                  <div class="col s12">
 		                    <div class="card grey lighten-3">
@@ -54,7 +53,6 @@
 		                      </div>
 		                    </div>
 	                  	</div>
-	                  </div>
 	                </div>
                 </div>
                <!-- <p>There are {{ reviews[0]?.content }} reviews in dis bitch</p> -->

@@ -5,12 +5,13 @@ import {AngularFire, AuthProviders, AuthMethods} from 'angularfire2';
 @Injectable()
 export class AuthService {
   user = {};
-
+  userId = "";
   constructor(public af: AngularFire, private router: Router) {
     this.af.auth.subscribe(user => {
       if(user) {
         // user logged in
         this.user = user;
+        this.userId = user.uid;
       }
       else {
         // user not logged in
