@@ -126,39 +126,20 @@ export class ArtistComponent extends Loading implements OnInit {
   } 
 
   hideWriteReview() {
-    // reset back to average and hide if user cancels review
-    this.userRating = 0;
     this.showWriteReview = false;
   }
 
   onSubmitReview(value: any) {
     // TODO: MAKE sure that the user is logged in before submitting review
-    // If there are no reviews we must add the review as the first for that artist.
     let reviewObject = {};
-    if (this.reviews.length != 0) {
-      // Have to create object this way to be able to use variables as keys.
-      let reviewObjectInner = {};
-      reviewObjectInner[this.userInfo.uid] = {
+    reviewObject[this.userInfo.uid] = {
         content: value.review_text,
         rating: this.userRating,
         reviewer: this.userInfo.displayName,
         title: value.review_title
-      };
-      reviewObject[this.artistID] = reviewObjectInner;
-      // Use reviewService to add to DB.
-      this.reviewService.addFirstReviewForArtist(this.artistID, reviewObjectInner);
-
-    } else {
-      reviewObject[this.userInfo.uid] = {
-          content: value.review_text,
-          rating: this.userRating,
-          reviewer: this.userInfo.displayName,
-          title: value.review_title
-        }
-      // Use reviewService to add to DB.
-      this.reviewService.addAnotherReviewForArtist(this.artistID, reviewObject);
-    }
-    console.log(reviewObject);
+      }
+    // Use reviewService to add to DB.
+    this.reviewService.addReviewForArtist(this.artistID, reviewObject);
     // Get reviews again once new one has been added.
     this.reviewService.getReviewsForArtist(this.artistID).subscribe(
         data => {
@@ -169,7 +150,9 @@ export class ArtistComponent extends Loading implements OnInit {
           }
           this.averageScore = Math.round(this.averageScore/data.length);
           // TODO, check if user has already rated artist and use that as userRating.
-        });
+    });
+    // Hide the form
+    this.hideWriteReview()
   }
 
   isPlaying(audios) {
