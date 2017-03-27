@@ -23,6 +23,10 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+!/node_modules/angular-star-rating/src/star-rating.component.ts
+!/node_modules/angular-star-rating/src/star-rating.module.ts
+!/node_modules/angular-star-rating/src/star-rating-config.ts
+
 # misc
 /.sass-cache
 /connect.lock
