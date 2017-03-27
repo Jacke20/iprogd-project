@@ -18,6 +18,7 @@ export class ArtistComponent extends Loading implements OnInit {
   topTracks = [];
   audios = [];
   reviews = [];
+  showWriteReview: boolean;
   averageScore: number; // Rounded average score of the artist
   playingID: number;
 
@@ -26,6 +27,7 @@ export class ArtistComponent extends Loading implements OnInit {
   }
 
   ngOnInit() {
+    this.showWriteReview = false; // Not shown by default
     this.route.params.subscribe(params => {
       // Start 2 loading tasks
       this.add_loading(0);
@@ -105,6 +107,7 @@ export class ArtistComponent extends Loading implements OnInit {
   }
 
   updateRating(new_rating) {
+    this.showWriteReview = true;
     console.log(new_rating);
   } 
 
