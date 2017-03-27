@@ -22,8 +22,8 @@ export class ReviewService {
 
  	// Use this if this is the first review for a artist. The format of objectToAdd
  	// should already be correct according to  firebase once this function is called.
- 	addFirstReviewForArtist(objectToAdd): void {
+ 	addFirstReviewForArtist(artistID, objectToAdd): void {
  		const items = this.af.database.list('reviews');
- 		items.push(objectToAdd);
+ 		items.update(artistID, objectToAdd);
  	}
 }

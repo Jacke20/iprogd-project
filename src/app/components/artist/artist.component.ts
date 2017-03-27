@@ -135,7 +135,7 @@ export class ArtistComponent extends Loading implements OnInit {
     // TODO: MAKE sure that the user is logged in before submitting review
     // If there are no reviews we must add the review as the first for that artist.
     let reviewObject = {};
-    if (this.reviews.length == 0) {
+    if (this.reviews.length != 0) {
       // Have to create object this way to be able to use variables as keys.
       let reviewObjectInner = {};
       reviewObjectInner[this.userInfo.uid] = {
@@ -146,7 +146,7 @@ export class ArtistComponent extends Loading implements OnInit {
       };
       reviewObject[this.artistID] = reviewObjectInner;
       // Use reviewService to add to DB.
-      this.reviewService.addFirstReviewForArtist(reviewObject);
+      this.reviewService.addFirstReviewForArtist(this.artistID, reviewObjectInner);
 
     } else {
       reviewObject[this.userInfo.uid] = {
