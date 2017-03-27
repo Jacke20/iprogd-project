@@ -132,9 +132,10 @@ export class ArtistComponent extends Loading implements OnInit {
   }
 
   onSubmitReview(value: any) {
+    // TODO: MAKE sure that the user is logged in before submitting review
     // If there are no reviews we must add the review as the first for that artist.
     let reviewObject = {};
-    if (this.reviews.length != 0) {
+    if (this.reviews.length == 0) {
       // Have to create object this way to be able to use variables as keys.
       let reviewObjectInner = {};
       reviewObjectInner[this.userInfo.uid] = {
@@ -144,6 +145,8 @@ export class ArtistComponent extends Loading implements OnInit {
         title: value.review_title
       };
       reviewObject[this.artistID] = reviewObjectInner;
+      // Use reviewService to add to DB.
+      this.reviewService.addFirstReviewForArtist(reviewObject);
 
     } else {
       reviewObject[this.userInfo.uid] = {
@@ -152,9 +155,21 @@ export class ArtistComponent extends Loading implements OnInit {
           reviewer: this.userInfo.displayName,
           title: value.review_title
         }
+      // Use reviewService to add to DB.
+      this.reviewService.addAnotherReviewForArtist(this.artistID, reviewObject);
     }
-    console.log("HAHAHAA");
     console.log(reviewObject);
+    // Get reviews again once new one has been added.
+    this.reviewService.getReviewsForArtist(this.artistID).subscribe(
+        data => {
+          this.reviews = data;
+          this.averageScore = 0;
+          for (let i = 0; i < data.length; i++) {
+            this.averageScore += Number(data[i].rating);
+          }
+          this.averageScore = Math.round(this.averageScore/data.length);
+          // TODO, check if user has already rated artist and use that as userRating.
+        });
   }
 
   isPlaying(audios) {
