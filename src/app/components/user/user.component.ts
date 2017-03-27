@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class UserComponent implements OnInit {
   userInfo: FirebaseListObservable<any>;
   reviews: FirebaseListObservable<any>;
   users: FirebaseListObservable<any>;
-  constructor(private userService: UserService, private authService: AuthService, private angularFire: AngularFire) { 
+  constructor(private userService: UserService, private authService: AuthService, private angularFire: AngularFire, private route: ActivatedRoute) { 
 
   }
 

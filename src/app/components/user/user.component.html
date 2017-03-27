@@ -40,9 +40,9 @@
 		                      <div class="card-content black-text">
 		                        <span class="card-title">
                               {{ review.title }} 
-                              <span class="rating right">
+                              	<span class="rating right">
                                 <star-rating-comp
-                                       [size]="'large'"
+                                       [size]="'medium'"
                                        [showHalfStars]="true"
                                        [readOnly]="true"
                                        [rating]="review.rating"
@@ -53,6 +53,12 @@
 		                        <div *ngIf="review.content!=null">
 		                        	<p><i> "{{ review.content }}"</i></p>
 		                        </div>
+		                        <br>
+		                        <p>Review written for: 
+		     						<a [routerLink]="['artist/', review.artist_id ]">
+		                        	{{ review.artist_name }}
+		                        	</a>
+		                        </p>
 		                      </div>
 		                    </div>
 	                  	</div>
