@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
   userId = this.authService.userId;
   userInfo: FirebaseListObservable<any>;
   reviews: FirebaseListObservable<any>;
+  favourites: FirebaseListObservable<any>;
   users: FirebaseListObservable<any>;
   constructor(private userService: UserService, private authService: AuthService, private angularFire: AngularFire, private route: ActivatedRoute) { 
 
@@ -35,8 +36,8 @@ export class UserComponent implements OnInit {
               case "reviews":
                 this.reviews = snapshot.val();
                 break;
-              case "favorites":
-                //code
+              case "favourites":
+                this.favourites = snapshot.val();
                 break;
               default:
                 // code...
@@ -56,6 +57,7 @@ export class UserComponent implements OnInit {
     console.log(this.user);
     this.getUserInfo();
     console.log(this.reviews);
+    console.log(this.favourites);
   }
 
 
