@@ -10,43 +10,42 @@ import 'rxjs/add/observable/throw';
 // users or concerts on multiple places.
 @Injectable()
 export class ConcertService {
-  private JAMBASEAPIKEY = "d67b3bq3jp28mwbtze4n5avu";
   private baseUrl = 'http://api.eventful.com/json/events/search?';  // Base URL to Eventful API search
   private apiUrl = '';
   private apiKey = '2t89BH4xkbpwCHzs'; // API Key
+
+  private SONGKICKAPIKEY = 'lghavdojXdj221Uw'; // Songkick API key
+  private SONGKICKBASEURL_START = 'http://api.songkick.com/api/3.0/events.json?';
+  private SONGKICKBASEURL_END = 'apikey=' + this.SONGKICKAPIKEY;
+  
 
   private headers = new Headers();
 
   constructor(private http: Http) { }
 
-  // Jambase methods THIS API SUCKS 50 limit each day nice Adrian
-
-  getConcertByArtist(id: string) {
-    let url = "http://api.jambase.com/events?artistId=2698&page=0&api_key=d67b3bq3jp28mwbtze4n5avu";
-    return this.http.get(url)
+  getConcerts(lat, lng) {
+    this.apiUrl = this.SONGKICKBASEURL_START + 'location=geo:' + lat + ',' + lng + '&' + this.SONGKICKBASEURL_END;
+    return this.http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  getConcertsByVenueId(id: string) {
-    let url = "http://api.jambase.com/events?venueId=" + id + "&page=0&api_key=" + this.JAMBASEAPIKEY;
-    return this.http.get(url)
+  getLocation(query) {
+    this.apiUrl = 'http://api.songkick.com/api/3.0/search/locations.json?query=' + query + '&' + this.SONGKICKBASEURL_END;
+     return this.http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  getVenue(searchTerm: string) {
-    let url = "http://api.jambase.com/venues?name=" + searchTerm + "&page=0&api_key=" + this.JAMBASEAPIKEY;
-    return this.http.get(url)
-      .map(res => res.json())
-      .catch(this.handleError);
-  }
+
 
   // Eventful methods
 
   // To get CORS to work, install Moesif Origin & CORS Changer plugin for chrome and set 
   // Access-Control-Allow-Credentials to true in options
   // date is an optional parameter
+
+  /*
   getConcerts(location, sort_order = 'relevance', date = 'Future') {
     this.apiUrl = this.baseUrl + 'q=music&location=' + location + '&date=' + date + '&sort_order=' + sort_order 
     + '&app_key=' + this.apiKey;
@@ -61,6 +60,7 @@ export class ConcertService {
       .map(res => res.json())
       .catch(this.handleError);
   }
+  */
 
   private handleError (error: Response | any) {
     console.log("ERROR");

@@ -10,10 +10,11 @@
                   <!--<span class="card-title">{{ result.title }}</span>-->
                 </div>
                 <div class="card-content">
-                  <p>Title: {{ result.title }}</p>
-                  <p>Location: {{ result.venu_name }}, {{ result.city_name }}</p>
-                  <p>Date: {{ result.start_time }}</p>
-                  <p>Artist: Kan inte få fram..</p>
+                  <p>Title: {{ result.displayName }}</p>
+                  <p>Location: {{ result.venue.displayName }}, {{ result.location.city }}</p>
+                  <p>Date: {{ result.start.date }}</p>
+                  <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
+                  <p>Artist: {{ result.performance[0].artist.displayName }}</p>
                 </div>
                 <div class="card-action valign">
                   <a href="#">Read more</a>

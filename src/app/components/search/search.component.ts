@@ -15,6 +15,8 @@ export class SearchComponent extends Loading implements OnInit {
   results = [];
   artists = [];
   searchTerm = '';
+  lat: number;
+  lng: number;
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
     private route: ActivatedRoute) { 
@@ -50,12 +52,22 @@ export class SearchComponent extends Loading implements OnInit {
         }
       );
 
-      this.concertService.getConcerts(this.searchTerm, 'date').subscribe(
+     this.concertService.getLocation(this.searchTerm).subscribe(
         data => {
-          this.results = data.events ? data.events.event : [];
-          this.ready();
+          //this.results = data.events ? data.events.event : [];
+          this.lat = data.resultsPage.results.location[0] ? data.resultsPage.results.location[0].city.lat : null;
+          this.lng = data.resultsPage.results.location[0] ? data.resultsPage.results.location[0].city.lng : null;
+          this.concertService.getConcerts(this.lat, this.lng).subscribe(
+            data => {
+              this.results = data.resultsPage.results.event ? data.resultsPage.results.event : [];
+              console.log(this.results);
+              this.ready();
+            }
+          );
         }
       );
+
+      
 
 
       
