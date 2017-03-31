@@ -17,7 +17,7 @@
                   <p>Artist: {{ result.performance[0].artist.displayName }}</p>
                 </div>
                 <div class="card-action valign">
-                  <a href="#">Read more</a>
+                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
                 </div>    
             </div>
           </div>

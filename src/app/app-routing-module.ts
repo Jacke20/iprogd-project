@@ -12,7 +12,7 @@ import { ArtistComponent }         from './components/artist/artist.component';
 
 
 const appRoutes: Routes = [
-  { path: 'concert', component: ConcertComponent },
+  { path: 'concert/:id', component: ConcertComponent },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   { path: 'search/:location', component: SearchComponent },
   { path: 'home', component: HomeComponent },
