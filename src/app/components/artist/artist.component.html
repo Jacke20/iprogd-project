@@ -1,135 +1,137 @@
 <div [ngSwitch]="is_loading()">
-    <div *ngSwitchCase="false">
-      <!-- <div [ngStyle]="{'background-image': 'url(' + photo + ')'}"></div> -->
-      <div class="parallax-container">
-        <div class="parallax main-picture" materialize="parallax">
-          <img src="{{ artist.images && artist.images[0].url }}" alt="">
-        </div>
+  <div *ngSwitchCase="false">
+    <!-- <div [ngStyle]="{'background-image': 'url(' + photo + ')'}"></div> -->
+    <div class="parallax-container">
+      <div class="parallax main-picture" materialize="parallax">
+        <img src="{{ artist.images && artist.images[0].url }}" alt="">
       </div>
-      <div class="container">
+    </div>
+    <div class="container">
+      <blockquote>
         <h2>{{ artist.name }}</h2>
-        
-        <!-- Card for general information about artist -->
-        <div class="row">
-          <div class="col s12">
-            <div class="card fade">
-              <div class="card-content">
-                <span class="card-title"><b>About</b></span>
-                <p>General information about artist goes here.</p>
-                <h5>Live performance reviews
-                  <span class="rating right">
-                  <star-rating-comp
-                         [size]="'large'"
-                         [rating] = "averageScore"
-                         (onClick)="updateRating($event)"
-                  >
-                  </star-rating-comp>
-                </span>
-                </h5>
-                <!-- Card for form used for writing reviews -->
-                <div *ngIf="showWriteReview">
-                  <div class="row">
-                    <form #reviewForm="ngForm" (ngSubmit)="onSubmitReview(reviewForm.value)" class="col s12">
-                      <div class="row">
-                        <div class="input-field col s6">
-                          <input id="review_title" name="review_title" type="text" maxlength="20" required ngModel>
-                          <label for="review_title">Title of review (Max 20 characters)</label>
+      </blockquote>
+      <!-- Card for general information about artist -->
+      <div class="row">
+        <div class="col s12">
+          <div class="card fade">
+            <div class="card-content">
+              <span class="card-title"><b>About</b></span>
+              <p>General information about artist goes here.</p>
+              <h5>Live performance reviews
+              <span class="rating right">
+                <star-rating-comp
+                [size]="'large'"
+                [rating]="averageScore"
+                (onClick)="updateRating($event)"
+                >
+                </star-rating-comp>
+              </span>
+              </h5>
+              <!-- Card for form used for writing reviews -->
+              <div *ngIf="showWriteReview">
+                <div class="row">
+                  <form #reviewForm="ngForm" (ngSubmit)="onSubmitReview(reviewForm.value)" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input materialize="characterCounter" id="review_title" name="review_title" type="text" maxlength="20" data-length="20" required ngModel>
+                        <label for="review_title">Title of review (Max 20 characters)</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <textarea materialize="characterCounter" id="review_text" name="review_text" class="materialize-textarea" maxlength="160" data-length="160" required ngModel></textarea>
+                        <label for="review_text">Write review (Max 160 characters)</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <a class="waves-effect waves-light btn" (click)="hideWriteReview($event)">Cancel</a>
+                      <button class="btn waves-effect waves-light" type="submit" name="submit_review">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div *ngFor="let review of reviews; let i=index">
+                <div *ngIf="i<3"> <!-- We only show the 3 first reviews -->
+                <!-- Card for one review -->
+                <div class="row">
+                  <div class="col s12">
+                    <div class="card grey lighten-3">
+                      <div class="card-content black-text">
+                        <span class="card-title">
+                          {{ review.title }}
+                          <span class="rating right">
+                            <star-rating-comp
+                            [size]="'medium'"
+                            [showHalfStars]="true"
+                            [readOnly]="true"
+                            [rating]="review.rating"
+                            >
+                            </star-rating-comp>
+                          </span>
+                        </span>
+                        <div *ngIf="review.content!=null">
+                          <p><i> "{{ review.content }}"</i></p>
                         </div>
+                        <br>
+                        <p>Review written by: {{ review.reviewer }}</p>
                       </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <textarea id="review_text" name="review_text" class="materialize-textarea" maxlength="160" required ngModel></textarea>
-                          <label for="review_text">Write review (Max 160 characters)</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <a class="waves-effect waves-light btn" (click)="hideWriteReview($event)">Cancel</a>
-                        <button class="btn waves-effect waves-light" type="submit" name="submit_review">Submit</button>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
-                <div *ngFor="let review of reviews; let i=index">
-                	<div *ngIf="i<3"> <!-- We only show the 3 first reviews -->
-                		<!-- Card for one review -->
-                		<div class="row">
-		                  <div class="col s12">
-		                    <div class="card grey lighten-3">
-		                      <div class="card-content black-text">
-		                        <span class="card-title">
-                              {{ review.title }} 
-                              <span class="rating right">
-                                <star-rating-comp
-                                       [size]="'medium'"
-                                       [showHalfStars]="true"
-                                       [readOnly]="true"
-                                       [rating]="review.rating"
-                                >
-                                </star-rating-comp>
-                              </span>
-                            </span>
-		                        <div *ngIf="review.content!=null">
-		                        	<p><i> "{{ review.content }}"</i></p>
-		                        </div>
-		                        <br>
-		                        <p>Review written by: {{ review.reviewer }}</p>
-		                      </div>
-		                    </div>
-	                  	</div>
-	                </div>
-                </div>
-               <!-- <p>There are {{ reviews[0]?.content }} reviews in dis bitch</p> -->
               </div>
-              <div class="card-action">
-                <a href="{{ artist.external_urls?.spotify }}" target="_blank">Listen to {{ artist.name }} on Spotify</a>
-              </div>
+              <!-- <p>There are {{ reviews[0]?.content }} reviews in dis bitch</p> -->
             </div>
           </div>
-        </div>
-        <!-- Upcoming events cards -->
-        <div class="row">
-          <div class="col s12">
-            <div class="card fade">
-              <div class="card-content">
-                <span class="card-title"><b>Upcoming events</b></span>
-                <p>Show a list of upcoming events by this artist</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Card for top tracks by artist -->
-        <div class="row">
-          <div class="col s12">
-            <ul class="collection with-header card fade">
-              <li class="collection-header"><h4>Top tracks</h4></li>
-              <li *ngFor="let track of topTracks; let i = index" class="collection-item">
-                <audio>
-                  <source type="audio/mpeg" src="{{ track.preview_url }}" [attr.id]="i">
-                </audio>
-                <div>{{ track.name }}
-                  <i class="material-icons right preview-play" [attr.id]="'p' + i" (click)="playSong(i)">play_circle_outline</i>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Albums by the artist -->
-        <div class="row">
-          <div class="col s12">
-            <div class="card album-card fade">
-              <div class="card-content">
-                <span class="card-title"><h4>Albums</h4></span>
-                <div class="row">
-                <app-album></app-album>
-              </div>
-            </div>
+          <div class="card-action">
+            <a href="{{ artist.external_urls?.spotify }}" target="_blank">Listen to {{ artist.name }} on Spotify</a>
           </div>
         </div>
       </div>
+    </div>
+    <!-- Upcoming events cards -->
+    <div class="row">
+      <div class="col s12">
+        <div class="card fade">
+          <div class="card-content">
+            <span class="card-title"><b>Upcoming events</b></span>
+            <p>Show a list of upcoming events by this artist</p>
+          </div>
+        </div>
       </div>
-      <!-- -->
     </div>
-    <div *ngSwitchCase="true">
-      <app-loading-indicator></app-loading-indicator>
+    <!-- Card for top tracks by artist -->
+    <div class="row">
+      <div class="col s12">
+        <ul class="collection with-header card fade">
+          <li class="collection-header"><h4>Top tracks</h4></li>
+          <li *ngFor="let track of topTracks; let i = index" class="collection-item">
+            <audio>
+              <source type="audio/mpeg" src="{{ track.preview_url }}" [attr.id]="i">
+            </audio>
+            <div>{{ track.name }}
+              <i class="material-icons right preview-play" [attr.id]="'p' + i" (click)="playSong(i)">play_circle_outline</i>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
+    <!-- Albums by the artist -->
+    <div class="row">
+      <div class="col s12">
+        <div class="card album-card fade">
+          <div class="card-content">
+            <span class="card-title"><h4>Albums</h4></span>
+            <div class="row">
+            <app-album></app-album>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- -->
+</div>
+<div *ngSwitchCase="true">
+<app-loading-indicator></app-loading-indicator>
+</div>
 </div>

@@ -20,19 +20,10 @@ import { ConcertService }    from "./services/concert.service";
 })
 export class AppComponent {
   user = {};
-  color = 'red'; // TODO: Remove later
-
-  artists = [];
-  events = [];
-  songs = [];
 
   constructor(public af: AngularFire, private authService: AuthService, 
     private spotifyService: SpotifyService, private concertService: ConcertService, private router: Router) {
-    this.af.auth.subscribe(auth => console.log(auth));
     this.user = authService.user;
-
-    // TODO: Remove later
-    spotifyService.getAlbumsForArtist("7FBDXY8U17aasVTH3rgxbS");
 
     // We have to call subscribe which lets us know when the request is finished since our
     // service methods return Observables and they use promises.

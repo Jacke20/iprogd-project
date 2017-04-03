@@ -19,4 +19,9 @@ export class ReviewService {
  		const items = this.af.database.list('reviews');
  		items.update(artistID, objectToAdd);
  	}
+
+ 	addReviewForUser(userID, objectToAdd): void {
+ 		this.af.database.object('users/' + userID + '/reviews/' + objectToAdd.artist)
+ 			.set(objectToAdd);
+ 	}
 }
