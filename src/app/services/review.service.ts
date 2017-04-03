@@ -21,7 +21,7 @@ export class ReviewService {
  	}
 
  	addReviewForUser(userID, objectToAdd): void {
- 		this.af.database.object('users/' + userID + '/reviews/' + objectToAdd.artist)
+ 		this.af.database.object('users/' + userID + '/reviews/')
  			.set(objectToAdd);
  	}
 }
