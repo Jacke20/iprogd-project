@@ -1,5 +1,9 @@
 {
   "rules": {
+    "reviews": {
+      ".read": true,
+      ".write": "auth != null"
+    },
     ".read": "auth != null",
     ".write": "auth != null"
   }

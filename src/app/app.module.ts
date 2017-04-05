@@ -42,10 +42,11 @@ import { LoadingIndicatorComponent } from './components/loading-indicator/loadin
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
   apiKey: "AIzaSyAT-aho1S_5doVAxms3PuFaTzb31CGsEmA",
-  authDomain: "iprogd-project.firebaseapp.com",
-  databaseURL: "https://iprogd-project.firebaseio.com",
-  storageBucket: "iprogd-project.appspot.com",
-  messagingSenderId: "298381157046"
+    authDomain: "iprogd-project.firebaseapp.com",
+    databaseURL: "https://iprogd-project.firebaseio.com",
+    projectId: "iprogd-project",
+    storageBucket: "iprogd-project.appspot.com",
+    messagingSenderId: "298381157046"
 };
 
 const myFirebaseAuthConfig = {
