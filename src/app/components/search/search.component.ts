@@ -59,7 +59,8 @@ export class SearchComponent extends Loading implements OnInit {
           this.lng = data.resultsPage.results.location ? data.resultsPage.results.location[0].city.lng : null;
           console.log(data);
           if(this.lat != null && this.lng != null) {
-            this.concertService.getConcerts(this.lat, this.lng).subscribe(
+            this.concertService.getConcerts(this.lat, this.lng)
+            .subscribe(
               data => {
                 this.results = data.resultsPage.results.event ? data.resultsPage.results.event : [];
                 console.log(this.results);
@@ -67,6 +68,7 @@ export class SearchComponent extends Loading implements OnInit {
               }
             );
           } else {
+            this.ready();
             // TODO No results
           }
         }
