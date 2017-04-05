@@ -13,8 +13,9 @@ import { Loading }           from '../../classes/loading';
   styleUrls: ['./concert.component.css']
 })
 export class ConcertComponent extends Loading implements OnInit {
-  concert: null;
-  artist: null;
+  concert: {};
+  artist: {};
+  id: number;
 	title: string = 'My first angular2-google-maps project';
 	lat: number = 51.678418; // byt dessa till koordinater för själva eventet
 	lng: number = 7.809007;
@@ -40,6 +41,7 @@ export class ConcertComponent extends Loading implements OnInit {
               this.spotifyService.getArtistInformation(data.artists.items[0].id).subscribe(
                 data => {
                     this.artist = data;
+                    this.id = data.id;
                     console.log(this.artist);
                     this.ready();
                   }
