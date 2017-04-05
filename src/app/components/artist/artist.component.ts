@@ -17,7 +17,7 @@ import { Loading }              from "../../classes/loading";
 export class ArtistComponent extends Loading implements OnInit {
   // Om du lyckas få det att fungera med bara userInfo = {} så go right ahead
   // Lägger in dummyvärden som skrivs över på init för att dis shit e dumb
-  userInfo;
+  userInfo = {uid: "-1", displayName: "ha"};
   artist = {};
   topTracks = [];
   audios = [];
@@ -35,7 +35,11 @@ export class ArtistComponent extends Loading implements OnInit {
 
   ngOnInit() {
     this.showWriteReview = false; // Not shown by default
-    this.userInfo = this.authService.user;
+    this.authService.af.auth.subscribe(auth => {
+       // kan inte sätta this.user = auth eftersom den INSISTERAR att user inte har ett "google"-fält
+       // så jag tar bara fram det jag behöver like dis.
+       this.userInfo = {uid: auth.uid, displayName: auth.google.displayName};
+     });
 
     this.route.params.subscribe(params => {
       this.artistID = params['id'];
