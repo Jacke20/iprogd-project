@@ -4,8 +4,6 @@
   		<a routerLink="home" routerLinkActive="active" class="brand-logo center hide-on-med-and-down">MyGIG</a>
   		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse link"><i class="material-icons">menu</i></a>
       <ul class="left">
-        <li><a routerLink="/concert" routerLinkActive="active">Concert</a></li>
-        <li><a routerLink="/artist/7FBDXY8U17aasVTH3rgxbS" routerLinkActive="active">ArtistTest</a></li>
         <li>
           <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
             <div class="input-field">
