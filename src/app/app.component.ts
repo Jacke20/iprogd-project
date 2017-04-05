@@ -32,7 +32,7 @@ export class AppComponent {
     this.user = authService.user;
 
     // TODO: Remove later
-    spotifyService.getAlbumsForArtist("7FBDXY8U17aasVTH3rgxbS");
+    //spotifyService.getAlbumsForArtist("7FBDXY8U17aasVTH3rgxbS");
 
     // We have to call subscribe which lets us know when the request is finished since our
     // service methods return Observables and they use promises.
