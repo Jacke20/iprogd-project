@@ -12,14 +12,8 @@ export class AuthService {
         // user logged in
         this.user = user;
         this.userId = user.uid;
-        // Add to database for storing reviews, favorites etc.
-        this.af.database.object('/users/' + user.uid)
-          .set({
-            provider: user.provider,
-            name: user.google.displayName,
-            photo_url: user.google.photoURL
-          });
-      } else {
+      }
+      else {
         // user not logged in
         this.user = {};
       }
@@ -29,7 +23,7 @@ export class AuthService {
   /**
    * Check if user is authenticated
    */
-  isAuthenticated(): boolean {
+  isAuthenticated() {
     return (Object.keys(this.user).length !== 0);
   }
 

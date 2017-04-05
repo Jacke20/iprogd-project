@@ -19,8 +19,8 @@ export class SpotifyService{
     this.headers.append('client_secret', this.client_secret);
   }
 
-  getAlbumsForArtist(artist_id, limit = 20, offset = 0, album_type = 'album') {
-    this.apiUrl = 'https://api.spotify.com/v1/artists/' + artist_id + '/albums?limit=' + limit + '&offset=' + offset + '&album_type=' + album_type;
+  getAlbumsForArtist(artist_id, limit = 20) {
+    this.apiUrl = 'https://api.spotify.com/v1/artists/' + artist_id + '/albums?limit=' + limit;
     return this.http.get(this.apiUrl, this.headers)
     .map(res => res.json())
     .catch(this.handleError);
