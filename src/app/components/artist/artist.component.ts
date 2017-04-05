@@ -136,18 +136,10 @@ export class ArtistComponent extends Loading implements OnInit {
         content: value.review_text,
         rating: this.userRating,
         reviewer: this.userInfo.displayName,
-        title: value.review_title,
-    }
-
-    let reviewObject2 = {};
-    reviewObject2[this.artistID] = {
-        content: value.review_text,
-        rating: this.userRating,
-        title: value.review_title,
-     }
+        title: value.review_title
+      }
     // Use reviewService to add to DB.
     this.reviewService.addReviewForArtist(this.artistID, reviewObject);
-    this.reviewService.addReviewForUser(this.userInfo.uid, reviewObject2);
     // Get reviews again once new one has been added.
     this.reviewService.getReviewsForArtist(this.artistID).subscribe(
         data => {
