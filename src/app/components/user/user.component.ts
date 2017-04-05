@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-import { SpotifyService } from '../../services/spotify.service';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -20,7 +19,7 @@ export class UserComponent implements OnInit {
   favourites: FirebaseListObservable<any>;
   artist: {};
   users: FirebaseListObservable<any>;
-  constructor(private userService: UserService, private authService: AuthService, private angularFire: AngularFire, private route: ActivatedRoute, private spotifyService: SpotifyService) { 
+  constructor(private userService: UserService, private authService: AuthService, private angularFire: AngularFire, private route: ActivatedRoute) { 
 
   }
 
@@ -60,11 +59,6 @@ export class UserComponent implements OnInit {
     this.getUserInfo();
     console.log(this.reviews);
     console.log(this.favourites);
-    this.spotifyService.getArtistInformation(this.favourites.artist_id).subscribe(
-                data => {
-                    this.artist = data;
-                    console.log(this.artist);
-                    this.ready();
   }
 
 
