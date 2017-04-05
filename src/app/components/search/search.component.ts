@@ -68,7 +68,7 @@ export class SearchComponent extends Loading implements OnInit {
               }
             );
           } else {
-            this.ready();
+             this.ready();
             // TODO No results
           }
         }

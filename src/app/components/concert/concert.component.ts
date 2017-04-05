@@ -13,8 +13,8 @@ import { Loading }           from '../../classes/loading';
   styleUrls: ['./concert.component.css']
 })
 export class ConcertComponent extends Loading implements OnInit {
-  concert: {};
-  artist: {};
+  concert: null;
+  artist: null;
 	title: string = 'My first angular2-google-maps project';
 	lat: number = 51.678418; // byt dessa till koordinater för själva eventet
 	lng: number = 7.809007;
