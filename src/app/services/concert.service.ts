@@ -17,29 +17,34 @@ export class ConcertService {
   private SONGKICKAPIKEY = 'lghavdojXdj221Uw'; // Songkick API key
   private SONGKICKBASEURL_START = 'http://api.songkick.com/api/3.0/events.json?';
   private SONGKICKBASEURL_END = 'apikey=' + this.SONGKICKAPIKEY;
+  private CORS = 'https://crossorigin.me/'; // For production
+
+
   
 
   private headers = new Headers();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.CORS = '';
+  }
 
   getConcerts(lat, lng) {
-    this.apiUrl = this.SONGKICKBASEURL_START + 'location=geo:' + lat + ',' + lng + '&' + this.SONGKICKBASEURL_END;
+    this.apiUrl = this.CORS + this.SONGKICKBASEURL_START + 'location=geo:' + lat + ',' + lng + '&' + this.SONGKICKBASEURL_END;
     return this.http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getConcertDetails(id) {
-    this.apiUrl = 'http://api.songkick.com/api/3.0/events/' + id + '.json?' + this.SONGKICKBASEURL_END;
+    this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/events/' + id + '.json?' + this.SONGKICKBASEURL_END;
     return this.http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getLocation(query) {
-    this.apiUrl = 'http://api.songkick.com/api/3.0/search/locations.json?query=' + query + '&' + this.SONGKICKBASEURL_END;
-     return this.http.get(this.apiUrl)
+    this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/search/locations.json?query=' + query + '&' + this.SONGKICKBASEURL_END;
+    return this.http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
