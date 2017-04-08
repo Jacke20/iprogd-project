@@ -3,10 +3,10 @@
       <div class="container">
         <h5>Music events found for: {{ searchTerm }}</h5>
         <div class="row">
-          <div class="col s12 m6 l3" *ngFor='let result of results'>
+          <div class="col s12 m6 l4" *ngFor='let result of results'>
             <div class="card">
                 <div class="card-image">
-                  <img src="images/sample-1.jpg" alt="TODO">
+                  <!--<img src="images/sample-1.jpg" alt="TODO">-->
                   <!--<span class="card-title">{{ result.title }}</span>-->
                 </div>
                 <div class="card-content">
@@ -14,7 +14,7 @@
                   <p>Location: {{ result.venue.displayName }}, {{ result.location.city }}</p>
                   <p>Date: {{ result.start.date }}</p>
                   <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
-                  <p>Artist: {{ result.performance[0].artist.displayName }}</p>
+                  <p>Artist: {{ result.performance[0].artist.displayName  }}</p>
                 </div>
                 <div class="card-action valign">
                   <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
@@ -25,7 +25,7 @@
 
         <h5>Artists found for: {{ searchTerm }}</h5>
         <div class="row">
-          <div class="col s12 m6 l3" *ngFor='let artist of artists'>
+          <div class="col s12 m6 l4" *ngFor='let artist of artists'>
             <div class="card">
                 <div class="card-image">
                   <!--<img src="{{ artist.images[0]?.url }}" alt="TODO">-->
