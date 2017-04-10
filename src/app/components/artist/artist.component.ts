@@ -22,6 +22,7 @@ export class ArtistComponent extends Loading implements OnInit {
   topTracks = [];
   audios = [];
   reviews = [];
+  events = [];
   showWriteReview: boolean;
   averageScore: number; // Rounded average score of the artist
   playingID: number;
@@ -29,7 +30,8 @@ export class ArtistComponent extends Loading implements OnInit {
   artistID: number;
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService,
-    private reviewService: ReviewService, private authService: AuthService) {
+    private reviewService: ReviewService, private authService: AuthService,
+    private concertService: ConcertService) {
       super(true, 3);
   }
 
@@ -50,6 +52,7 @@ export class ArtistComponent extends Loading implements OnInit {
       this.spotifyService.getArtistInformation(params['id']).subscribe(
         data => {
           this.artist = data;
+          this.searchConcertsByArtist(this.artist);
           this.loading_ready(0);
         }
       );
@@ -161,6 +164,19 @@ export class ArtistComponent extends Loading implements OnInit {
       }
     }
     return null;
+  }
+  // param artist is the artist object
+  private searchConcertsByArtist(artist) {
+    this.concertService.getArtistsByName(artist.name).subscribe(
+      data => {
+        let id = data.resultsPage.results.artist[0].id;
+        this.concertService.getConcertsByArtistId(id).subscribe(
+          data => {
+            this.events = data.resultsPage.results.event ? data.resultsPage.results.event : [];
+          }
+        );
+      }
+    );
   }
 
 }
