@@ -1,7 +1,9 @@
 <div [ngSwitch]="loading">
     <div *ngSwitchCase="false">
       <div class="container">
-        <h5>Music events found for: {{ searchTerm }}</h5>
+        <blockquote>
+          <h5>Music events found for: {{ searchTerm }}</h5>
+        </blockquote>
         <div class="row">
           <div class="col s12 m6 l4" *ngFor='let result of results'>
             <div class="card">
@@ -22,8 +24,9 @@
             </div>
           </div>
         </div>
-
-        <h5>Artists found for: {{ searchTerm }}</h5>
+        <blockquote>
+           <h5>Artists found for: {{ searchTerm }}</h5>
+        </blockquote>
         <div class="row">
           <div class="col s12 m6 l4" *ngFor='let artist of artists'>
             <div class="card">
