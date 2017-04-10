@@ -26,25 +26,53 @@
         
 
         <div class="row">
-          <div class="col s12 m6 l4" *ngFor='let result of results'>
-            <div class="card">
-                <div class="card-image">
-                  <!--<img src="images/sample-1.jpg" alt="TODO">-->
-                  <!--<span class="card-title">{{ result.title }}</span>-->
-                </div>
-                <div class="card-content">
-                  <p>Title: {{ result.displayName }}</p>
-                  <p>Location: {{ result.venue.displayName }}, {{ result.location.city }}</p>
-                  <p>Date: {{ result.start.date }}</p>
-                  <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
-                  <p>Artist: {{ result.performance[0].artist.displayName  }}</p>
-                </div>
-                <div class="card-action valign">
-                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
-                </div>    
-            </div>
-          </div>
+        <!-- Om någon kommer på ett bättre sätt än det här så fixa plz. Testade med en array för current results
+        		men då blir async problem -->
+        	<ng-container [ngSwitch]="toggledFilter==1">
+	        	<ng-container *ngSwitchCase="true">
+		        	<div class="col s12 m6 l4" *ngFor='let result of results'>
+		            <div class="card">
+		                <div class="card-image">
+		                  <!--<img src="images/sample-1.jpg" alt="TODO">-->
+		                  <!--<span class="card-title">{{ result.title }}</span>-->
+		                </div>
+		                <div class="card-content">
+		                  <p>Title: {{ result.displayName }}</p>
+		                  <p>Location: {{ result.venue.displayName }}, {{ result.location.city }}</p>
+		                  <p>Date: {{ result.start.date }}</p>
+		                  <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
+		                  <p>Artist: {{ result.performance[0].artist.displayName  }}</p>
+		                </div>
+		                <div class="card-action valign">
+		                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
+		                </div>    
+		            </div>
+		          </div>
+		        </ng-container>
+		        <ng-container *ngSwitchCase="false">
+		        	<div class="col s12 m6 l4" *ngFor='let result of filteredResults'>
+		            <div class="card">
+		                <div class="card-image">
+		                  <!--<img src="images/sample-1.jpg" alt="TODO">-->
+		                  <!--<span class="card-title">{{ result.title }}</span>-->
+		                </div>
+		                <div class="card-content">
+		                  <p>Title: {{ result.displayName }}</p>
+		                  <p>Location: {{ result.venue.displayName }}, {{ result.location.city }}</p>
+		                  <p>Date: {{ result.start.date }}</p>
+		                  <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
+		                  <p>Artist: {{ result.performance[0].artist.displayName  }}</p>
+		                </div>
+		                <div class="card-action valign">
+		                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
+		                </div>    
+		            </div>
+		          </div>
+		        </ng-container>
+        	</ng-container>
+          
         </div>
+        <!-- Artist results -->
         <blockquote>
            <h5>Artists found for: {{ searchTerm }}</h5>
         </blockquote>

@@ -12,6 +12,7 @@ import { ConcertService }    from "../../services/concert.service";
   providers: [SpotifyService, ConcertService] // TODO: Remove SpotifyService
 })
 export class SearchComponent extends Loading implements OnInit {
+  // Contains All the results with no filter active
   results = [];
   artists = [];
   artistName = undefined;
@@ -20,8 +21,7 @@ export class SearchComponent extends Loading implements OnInit {
   lng: number;
   // 1 = all, 2 = artist and so on. All is selected by default
   toggledFilter;
-  // Contains the results from the search after a filter i applied.
-  // [] = no filter
+  // Contains the results from the search depending on filter.
   filteredResults = [];
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
@@ -34,12 +34,12 @@ export class SearchComponent extends Loading implements OnInit {
 
     this.route.params.subscribe(params => {
       this.standby();
-      this.toggledFilter = 1;
       this.searchTerm = params['location'];
 
       this.searchArtistsByName();
       this.searchConcertsByLocation();
-
+      // No filter is standard
+      this.noFilter(1);
       //this.searchConcertsByArtist();
 
 
@@ -117,6 +117,7 @@ export class SearchComponent extends Loading implements OnInit {
 
   noFilter(number) {
     this.toggledFilter = number;
+    this.filteredResults = this.results;
   }
 
   filterArtist(number) {
