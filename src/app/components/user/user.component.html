@@ -22,7 +22,7 @@
 					<span class="card-title">Favourites</span>
 					<div class="row">
 					<div *ngFor="let favourite of favourites; let i=index">
-                	<div *ngIf="i<4 && favourite != null"> <!-- We only show the 3 first artists -->
+                	<div *ngIf="i<favCount && favourite != null"> <!-- We only show the 3 first artists -->
                 		<!-- Card for one artist -->
 	                		<div class="col s4">
 						              	<img src="{{ favourite.image_url }}" alt="" class="circle responsive-img">
@@ -35,7 +35,10 @@
 	                </div>
                 	</div>
 					</div>
-					<p class="center">Show more</p>
+					<p class="center showmore">
+						<a class="waves-effect waves-light btn" (click)="moreFav()">Show more</a>
+						<!-- moreFav() shows 3 more artists -->
+					</p>
 				</div>
 			</div> 
 		</div> 		
@@ -45,7 +48,7 @@
 				<div class="card-content">
 					<span class="card-title">Reviews</span>
 					<div *ngFor="let review of reviews; let i=index">
-                	<div *ngIf="i<4 && review != null"> <!-- We only show the 3 first reviews -->
+                	<div *ngIf="i<revCount && review != null"> <!-- We only show the 3 first reviews -->
                 		<!-- Card for one review -->
                 		<div class="row">
 		                  <div class="col s12">
@@ -78,6 +81,10 @@
 	                  </div>
 	                </div>
                 </div>
+                	<p class="center showmore">
+						<a class="waves-effect waves-light btn" (click)="moreRev()">Show more</a>
+						<!-- moreRev() shows 3 more reviews -->
+					</p>
 				</div>
 			</div>
 		</div>
