@@ -38,10 +38,10 @@
 		                </div>
 		                <div class="card-content">
 		                  <p>Title: {{ result.displayName }}</p>
-		                  <p>Location: {{ result.venue.displayName }}, {{ result.location.city }}</p>
-		                  <p>Date: {{ result.start.date }}</p>
+		                  <p>Location: {{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</p>
+		                  <p>Date: {{ result.start?.date ? result.start.date : 'Not specified'}}</p>
 		                  <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
-		                  <p>Artist: {{ result.performance[0].artist.displayName  }}</p>
+		                  <p>Artist: {{ result.performance ? result.performance[0].artist.displayName : 'Not specified' }}</p>
 		                </div>
 		                <div class="card-action valign">
 		                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
@@ -57,12 +57,12 @@
 		                  <!--<span class="card-title">{{ result.title }}</span>-->
 		                </div>
 		                <div class="card-content">
-		                  <p>Title: {{ result.displayName }}</p>
-		                  <p>Location: {{ result.venue.displayName }}, {{ result.location.city }}</p>
-		                  <p>Date: {{ result.start.date }}</p>
-		                  <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
-		                  <p>Artist: {{ result.performance[0].artist.displayName  }}</p>
-		                </div>
+                      <p>Title: {{ result.displayName }}</p>
+                      <p>Location: {{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</p>
+                      <p>Date: {{ result.start?.date ? result.start.date : 'Not specified'}}</p>
+                      <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
+                      <p>Artist: {{ result.performance ? result.performance[0].artist.displayName : 'Not specified' }}</p>
+                    </div>
 		                <div class="card-action valign">
 		                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
 		                </div>    

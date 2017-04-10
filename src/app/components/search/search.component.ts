@@ -40,6 +40,7 @@ export class SearchComponent extends Loading implements OnInit {
       this.searchArtistsByName();
       this.searchConcertsByLocation();
       this.searchConcertsByArtist();
+      this.searchConcertsByVenue();
       // No filter is standard
       this.noFilter(1);
       
@@ -73,7 +74,7 @@ export class SearchComponent extends Loading implements OnInit {
      this.spotifyService.searchArtists(this.searchTerm).subscribe(
         data => {
           this.artists = data.artists.items;
-          console.log(data.artists);
+          //console.log(data.artists);
         }
       );
   }
@@ -85,16 +86,17 @@ export class SearchComponent extends Loading implements OnInit {
           //this.results = data.events ? data.events.event : [];
           this.lat = data.resultsPage.results.location ? data.resultsPage.results.location[0].city.lat : null;
           this.lng = data.resultsPage.results.location ? data.resultsPage.results.location[0].city.lng : null;
-          console.log(data);
+          //console.log(data);
           if(this.lat != null && this.lng != null) {
             this.concertService.getConcerts(this.lat, this.lng)
             .subscribe(
               data => {
+                console.log(data);
                 if(data.resultsPage.results) {
                   this.results.push.apply(this.results, data.resultsPage.results.event);
                 }
                 //this.results += data.resultsPage.results.event ? data.resultsPage.results.event : [];
-                console.log(this.results);
+                //console.log(this.results);
                 this.ready();
               }
             );
@@ -109,16 +111,29 @@ export class SearchComponent extends Loading implements OnInit {
   private searchConcertsByArtist() {
     this.concertService.getArtistsByName(this.searchTerm).subscribe(
       data => {
-        let id = data.resultsPage.results.artist[0].id;
-        this.concertService.getConcertsByArtistId(id).subscribe(
-          data => {
-            if(data.resultsPage.results) {
-              this.results.push.apply(this.results, data.resultsPage.results.event);
+        if(data.resultsPage.results.artist) {
+          let id = data.resultsPage.results.artist[0].id;
+          this.concertService.getConcertsByArtistId(id).subscribe(
+            data => {
+              if(data.resultsPage.results) {
+                this.results.push.apply(this.results, data.resultsPage.results.event);
+              }
+              //this.results = data.resultsPage.results.event ? data.resultsPage.results.event : [];
+              this.artistName = this.searchTerm;
             }
-            //this.results = data.resultsPage.results.event ? data.resultsPage.results.event : [];
-            this.artistName = this.searchTerm;
-          }
-        );
+          );
+        }
+      }
+    );
+  }
+
+  private searchConcertsByVenue() {
+     this.concertService.getConcertsByVenue(this.searchTerm).subscribe(
+      data => {
+        console.log(data);
+        if(data.resultsPage.results) {
+          this.results.push.apply(this.results, data.resultsPage.results.venue);
+        }
       }
     );
   }
@@ -160,7 +175,7 @@ export class SearchComponent extends Loading implements OnInit {
     this.changeFilterToogle(number);
     let upperCaseSearchTerm = this.searchTerm.toUpperCase();
     this.filteredResults = this.results.filter((result) => {
-      let venue = result.venue.displayName.toUpperCase();
+      let venue = result.displayName.toUpperCase();
       if (venue.includes(upperCaseSearchTerm)) {
         return true;
       } else {

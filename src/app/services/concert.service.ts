@@ -36,6 +36,13 @@ export class ConcertService {
       .catch(this.handleError);
   }
 
+  getConcertsByVenue(query) {
+    this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/search/venues.json?query=' + query + '&' + this.SONGKICKBASEURL_END;
+    return this.http.get(this.apiUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
   getConcertDetails(id) {
     this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/events/' + id + '.json?' + this.SONGKICKBASEURL_END;
     return this.http.get(this.apiUrl)
