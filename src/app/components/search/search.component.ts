@@ -19,7 +19,10 @@ export class SearchComponent extends Loading implements OnInit {
   lat: number;
   lng: number;
   // 1 = all, 2 = artist and so on. All is selected by default
-  toggledFilter = 1;
+  toggledFilter;
+  // Contains the results from the search after a filter i applied.
+  // [] = no filter
+  filteredResults = [];
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
     private route: ActivatedRoute) { 
@@ -31,6 +34,7 @@ export class SearchComponent extends Loading implements OnInit {
 
     this.route.params.subscribe(params => {
       this.standby();
+      this.toggledFilter = 1;
       this.searchTerm = params['location'];
 
       this.searchArtistsByName();
@@ -117,14 +121,43 @@ export class SearchComponent extends Loading implements OnInit {
 
   filterArtist(number) {
     this.changeFilterToogle(number);
+    let upperCaseSearchTerm = this.searchTerm.toUpperCase();
+    this.filteredResults = this.results.filter((result) => {
+      for (var i = 0; i < result.performance.length; i++) {
+        let artistName = result.performance[i].artist.displayName.toUpperCase();
+        if (artistName.includes(upperCaseSearchTerm)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    });
   }
 
   filterCity(number) {
     this.changeFilterToogle(number);
+    let upperCaseSearchTerm = this.searchTerm.toUpperCase();
+    this.filteredResults = this.results.filter((result) => {
+      let city = result.location.city.toUpperCase();
+      if (city.includes(upperCaseSearchTerm)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   filterVenue(number) {
     this.changeFilterToogle(number);
+    let upperCaseSearchTerm = this.searchTerm.toUpperCase();
+    this.filteredResults = this.results.filter((result) => {
+      let venue = result.venue.displayName.toUpperCase();
+      if (venue.includes(upperCaseSearchTerm)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
 
