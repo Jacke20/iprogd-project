@@ -18,6 +18,8 @@ export class SearchComponent extends Loading implements OnInit {
   searchTerm = '';
   lat: number;
   lng: number;
+  // 1 = all, 2 = artist and so on. All is selected by default
+  toggledFilter = 1;
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
     private route: ActivatedRoute) { 
@@ -107,6 +109,14 @@ export class SearchComponent extends Loading implements OnInit {
         );
       }
     );
+  }
+
+  filterArtist(number) {
+    this.changeFilterToogle(number);
+  }
+
+  changeFilterToogle(number) {
+    this.toggledFilter = number;
   }
 
 }

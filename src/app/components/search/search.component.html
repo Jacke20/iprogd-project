@@ -1,9 +1,30 @@
 <div [ngSwitch]="loading">
     <div *ngSwitchCase="false">
       <div class="container">
-        <blockquote>
+		    <blockquote>
           <h5>Music events found for: {{ searchTerm }}</h5>
+          <br>
+          <h6>Search for: </h6>
+          <!-- The button/filter that is currently active is disabled -->
+	        <ng-container [ngSwitch]="toggledFilter==1">
+	        	<a class="btn disabled waves-effect waves-light btn" *ngSwitchCase="true">All</a>
+	        	<a class="btn waves-effect waves-light btn" (click)="changeFilterToogle(1)" *ngSwitchDefault>All</a>
+	        </ng-container>
+	        <ng-container [ngSwitch]="toggledFilter==2">
+	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Artist</a>
+	        	<a class="btn waves-effect waves-light btn" (click)="filterArtist(2)" *ngSwitchDefault>Artist</a>
+	        </ng-container>
+	         <ng-container [ngSwitch]="toggledFilter==3">
+	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">City</a>
+	        	<a class="btn waves-effect waves-light btn" (click)="filterCity(3)" *ngSwitchDefault>City</a>
+	        </ng-container>
+	         <ng-container [ngSwitch]="toggledFilter==3">
+	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Venue</a>
+	        	<a class="btn waves-effect waves-light btn" (click)="filterVenue(4)" *ngSwitchDefault>Venue</a>
+	        </ng-container>
         </blockquote>
+        
+
         <div class="row">
           <div class="col s12 m6 l4" *ngFor='let result of results'>
             <div class="card">
