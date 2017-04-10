@@ -8,7 +8,7 @@
           <!-- The button/filter that is currently active is disabled -->
 	        <ng-container [ngSwitch]="toggledFilter==1">
 	        	<a class="btn disabled waves-effect waves-light btn" *ngSwitchCase="true">All</a>
-	        	<a class="btn waves-effect waves-light btn" (click)="changeFilterToogle(1)" *ngSwitchDefault>All</a>
+	        	<a class="btn waves-effect waves-light btn" (click)="noFilter(1)" *ngSwitchDefault>All</a>
 	        </ng-container>
 	        <ng-container [ngSwitch]="toggledFilter==2">
 	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Artist</a>
@@ -18,7 +18,7 @@
 	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">City</a>
 	        	<a class="btn waves-effect waves-light btn" (click)="filterCity(3)" *ngSwitchDefault>City</a>
 	        </ng-container>
-	         <ng-container [ngSwitch]="toggledFilter==3">
+	         <ng-container [ngSwitch]="toggledFilter==4">
 	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Venue</a>
 	        	<a class="btn waves-effect waves-light btn" (click)="filterVenue(4)" *ngSwitchDefault>Venue</a>
 	        </ng-container>

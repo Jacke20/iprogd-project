@@ -111,9 +111,22 @@ export class SearchComponent extends Loading implements OnInit {
     );
   }
 
+  noFilter(number) {
+    this.toggledFilter = number;
+  }
+
   filterArtist(number) {
     this.changeFilterToogle(number);
   }
+
+  filterCity(number) {
+    this.changeFilterToogle(number);
+  }
+
+  filterVenue(number) {
+    this.changeFilterToogle(number);
+  }
+
 
   changeFilterToogle(number) {
     this.toggledFilter = number;
