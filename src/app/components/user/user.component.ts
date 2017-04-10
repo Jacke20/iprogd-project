@@ -12,14 +12,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
+  favCount = 4;
+  revCount = 4;
   user = this.authService.user;
   userId = this.authService.userId;
   userInfo: FirebaseListObservable<any>;
   reviews: FirebaseListObservable<any>;
   favourites: FirebaseListObservable<any>;
+  artist: {};
   users: FirebaseListObservable<any>;
   constructor(private userService: UserService, private authService: AuthService, private angularFire: AngularFire, private route: ActivatedRoute) { 
 
+  }
+
+  moreFav(): void {
+    this.favCount = this.favCount + 3;
+  }
+
+  moreRev(): void {
+    this.revCount = this.revCount + 3;
   }
 
   getUsers(): void {
@@ -53,11 +64,11 @@ export class UserComponent implements OnInit {
   // We used the ngOnInit Lifecycle Hook to get users when our AppComponent activates.
   ngOnInit(): void {
     this.getUsers();
-    console.log("FUCKASSBITCH");
     console.log(this.user);
     this.getUserInfo();
     console.log(this.reviews);
     console.log(this.favourites);
+    console.log("hello");
   }
 
 

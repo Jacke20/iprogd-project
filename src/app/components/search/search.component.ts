@@ -14,6 +14,7 @@ import { ConcertService }    from "../../services/concert.service";
 export class SearchComponent extends Loading implements OnInit {
   results = [];
   artists = [];
+  artistName = undefined;
   searchTerm = '';
   lat: number;
   lng: number;
@@ -30,6 +31,12 @@ export class SearchComponent extends Loading implements OnInit {
       this.standby();
       this.searchTerm = params['location'];
 
+      this.searchArtistsByName();
+      this.searchConcertsByLocation();
+
+      //this.searchConcertsByArtist();
+
+
 /*
        this.concertService.getVenue(this.searchTerm).subscribe(
         data => {
@@ -45,13 +52,26 @@ export class SearchComponent extends Loading implements OnInit {
 
       */
      
+    });
+    
+
+ 
+
+
+  }
+
+  private searchArtistsByName() {
+     // Get artists by query
      this.spotifyService.searchArtists(this.searchTerm).subscribe(
         data => {
           this.artists = data.artists.items;
           console.log(data.artists);
         }
       );
+  }
 
+  private searchConcertsByLocation() {
+    // Get concerts by location for query
      this.concertService.getLocation(this.searchTerm).subscribe(
         data => {
           //this.results = data.events ? data.events.event : [];
@@ -73,17 +93,20 @@ export class SearchComponent extends Loading implements OnInit {
           }
         }
       );
+  }
 
-      
-
-
-      
-    });
-    
-
- 
-
-
+  private searchConcertsByArtist() {
+    this.concertService.getArtistsByName(this.searchTerm).subscribe(
+      data => {
+        let id = data.resultsPage.results.artist[0].id;
+        this.concertService.getConcertsByArtistId(id).subscribe(
+          data => {
+            this.results = data.resultsPage.results.event ? data.resultsPage.results.event : [];
+            this.artistName = this.searchTerm;
+          }
+        );
+      }
+    );
   }
 
 }

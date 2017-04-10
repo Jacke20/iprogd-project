@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/mergeMap';
 
 // Services provide things that we want to use on several locations in our app. For example we might want to use a list of
 // users or concerts on multiple places.
@@ -44,6 +45,20 @@ export class ConcertService {
 
   getLocation(query) {
     this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/search/locations.json?query=' + query + '&' + this.SONGKICKBASEURL_END;
+    return this.http.get(this.apiUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getArtistsByName(query) {
+    this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/search/artists.json?query=' + query + '&' + this.SONGKICKBASEURL_END;
+    return this.http.get(this.apiUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getConcertsByArtistId(id) {
+    this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/artists/' + id + '/calendar.json?' + this.SONGKICKBASEURL_END;
     return this.http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
