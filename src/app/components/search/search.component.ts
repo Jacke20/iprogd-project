@@ -33,6 +33,7 @@ export class SearchComponent extends Loading implements OnInit {
 
 
     this.route.params.subscribe(params => {
+      this.results = [];
       this.standby();
       this.searchTerm = params['location'];
 
