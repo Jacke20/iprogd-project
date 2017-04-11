@@ -142,6 +142,7 @@ export class ArtistComponent extends Loading implements OnInit {
         title: value.review_title
     }
 
+    reviewObjectUser = {
         artist_id: this.artistID,
         artist_name: this.artist.name,
         content: value.review_text,
