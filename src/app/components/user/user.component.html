@@ -19,15 +19,14 @@
 		<div class="col s6">
 			<div class="card">
 				<div class="card-content">
-					<span class="card-title">Favourites</span>
+					<span class="card-title"><b>Favourites</b></span>
 					<div class="row">
 					<div *ngFor="let favourite of favourites; let i=index">
                 	<div *ngIf="i<favCount && favourite != null"> <!-- We only show the 3 first artists -->
                 		<!-- Card for one artist -->
 	                		<div class="col s4">
-						              	<img src="{{ favourite.image_url }}" alt="" class="circle responsive-img">
 						              	<p class="flow-text center">
-						              		<a href="#" [routerLink]="['/artist', favourite.artist_id]">
+						              		<a href="#" style="color:orange" [routerLink]="['/artist', favourite.artist_id]">
 			                        			{{ favourite.artist_name }}
 			                        		</a>
 			                        	</p>
@@ -46,7 +45,7 @@
 		<div class="col s6">
 			<div class="card">
 				<div class="card-content">
-					<span class="card-title">Reviews</span>
+					<span class="card-title"><b>Reviews</b></span>
 					<div *ngFor="let review of reviews; let i=index">
                 	<div *ngIf="i<revCount && review != null"> <!-- We only show the 3 first reviews -->
                 		<!-- Card for one review -->
@@ -71,7 +70,7 @@
 		                        </div>
 		                        <br>
 		                        <p>Review written for: 
-		     						<a href="#" [routerLink]="['/artist', review.artist_id ]">
+		     						<a href="#" style="color:orange" [routerLink]="['/artist', review.artist_id ]">
 		                        	{{ review.artist_name }}
 		                        	</a>
 		                        </p>
