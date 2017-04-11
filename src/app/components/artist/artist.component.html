@@ -9,6 +9,14 @@
     <div class="container">
       <blockquote>
         <h2>{{ artist.name }}</h2>
+        <ng-container [ngSwitch]="isFavourite">
+          <a *ngSwitchCase="false" class="waves-effect waves-light btn" (click)="addFavourite()">
+            <i class="material-icons right">perm_identity</i>Add Favourite
+          </a>
+          <a *ngSwitchCase="true" class="waves-effect waves-light btn red" (click)="removeFavourite()">
+            <i class="material-icons right">not_interested</i>Remove Favourite
+          </a>
+        </ng-container>
       </blockquote>
       <!-- Card for general information about artist -->
       <div class="row">

@@ -28,6 +28,7 @@ export class ArtistComponent extends Loading implements OnInit {
   playingID: number;
   userRating: number; // the score that the current user has given the artist
   artistID: number;
+  isFavourite: boolean;
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService,
     private reviewService: ReviewService, private authService: AuthService,
@@ -53,6 +54,14 @@ export class ArtistComponent extends Loading implements OnInit {
         data => {
           this.artist = data;
           this.searchConcertsByArtist(this.artist);
+          // Determin if artist is a favourite or not
+          this.reviewService.getArtistFavourite(this.userInfo.uid, data.id).subscribe(snapshot => {
+            if (snapshot.val() != null) {
+              this.isFavourite = true;
+            } else {
+              this.isFavourite = false;
+            }
+          });
           this.loading_ready(0);
         }
       );
@@ -165,6 +174,16 @@ export class ArtistComponent extends Loading implements OnInit {
     }
     return null;
   }
+
+  // Adds the artist as a favourite for the user in the DB
+  addFavourite() {
+    this.reviewService.addArtistAsFavourite(this.userInfo.uid, this.artist);
+  }
+
+  removeFavourite() {
+  	this.reviewService.removeArtistAsFavourite(this.userInfo.uid, this.artist);
+  }
+
   // param artist is the artist object
   private searchConcertsByArtist(artist) {
     this.concertService.getArtistsByName(artist.name).subscribe(
