@@ -3,16 +3,19 @@ div.card {
   overflow: hidden;
 }
 
-div.card-content {
-  height: 200px;
-  overflow-y: auto;
+.card img {
+	height: 300px;
 }
 
-div.card-action {
-  text-align: center;
-  margin-top: 20px;
-}
+.card-title {
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
 
-div.card-action a {
-  margin: 0 auto;
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 5px;
+   margin-bottom: 25px; 
 }

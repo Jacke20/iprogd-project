@@ -77,19 +77,15 @@
            <h5>Artists found for: {{ searchTerm }}</h5>
         </blockquote>
         <div class="row">
-          <div class="col s12 m6 l4" *ngFor='let artist of artists'>
-            <div class="card">
-                <div class="card-image">
-                  <!--<img src="{{ artist.images[0]?.url }}" alt="TODO">-->
-                  <!--<span class="card-title">{{ result.title }}</span>-->
+          <div *ngFor='let artist of artists' class="col s12 m6 l4">
+          <a [routerLink]="['/artist', artist.id]">
+         	<div class="card hoverable">
+         		<div class="card-image">
+                  <img class="responsive-img" src="{{ artist.images[1]?.url }}" alt="No image found!">
+                  <span class="card-title">{{ artist.name }}</span>
                 </div>
-                <div class="card-content">
-                  <p>Name: {{ artist.name }}</p>
-                </div>
-                <div class="card-action valign">
-                  <a href="#" [routerLink]="['/artist', artist.id ]">Read more</a>
-                </div>    
-            </div>
+          	</div>
+          </a>
           </div>
         </div>
       </div>
