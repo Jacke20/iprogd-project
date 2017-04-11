@@ -49,7 +49,7 @@
           <span class="card-title"><b>Event</b></span>
           <h5>Performances</h5>
           <ul class="collection">
-            <li class="collection-item"><b>Headliner: </b>{{ concert?.performance[0].displayName }}</li>
+            <li class="collection-item"><b>Headliner: </b>{{ concert?.performance[0].displayName ? concert.performance[0].displayName : 'Not Available'}}</li>
             <ng-container *ngFor="let performer of concert?.performance; let i=index">
            		<ng-container *ngIf="i>0">
            			<li class="collection-item"><b>Supporting act: </b>{{ performer.displayName }}</li>
@@ -58,8 +58,8 @@
           </ul>
           <h5>Good to know</h5>
           <ul class="collection">
-          	<li class="collection-item"><b>Date: </b>{{ concert?.start.date }}</li>
-          	<li class="collection-item"><b>Time: </b>{{ concert?.start.time }}</li>
+          	<li class="collection-item"><b>Date: </b>{{ concert?.start.date ? concert.start.date : 'Not Available'}}</li>
+          	<li class="collection-item"><b>Time: </b>{{ concert?.start.time ? concert.start.time : 'Not Available'}}</li>
           	<li class="collection-item"><b>Age Restriction: </b>{{ concert?.ageRestriction ? concert.ageRestriction : 'None'}}</li>
           </ul>
         </div>
