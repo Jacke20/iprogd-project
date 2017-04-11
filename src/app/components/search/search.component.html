@@ -1,99 +1,106 @@
 <div [ngSwitch]="loading">
-    <div *ngSwitchCase="false">
-      <div class="container">
-		    <blockquote>
-          <h5>Music events found for: {{ searchTerm }}</h5>
-          <br>
-          <h6>Search for: </h6>
-          <!-- The button/filter that is currently active is disabled -->
-	        <ng-container [ngSwitch]="toggledFilter==1">
-	        	<a class="btn disabled waves-effect waves-light btn" *ngSwitchCase="true">All</a>
-	        	<a class="btn waves-effect waves-light btn" (click)="noFilter(1)" *ngSwitchDefault>All</a>
-	        </ng-container>
-	        <ng-container [ngSwitch]="toggledFilter==2">
-	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Artist</a>
-	        	<a class="btn waves-effect waves-light btn" (click)="filterArtist(2)" *ngSwitchDefault>Artist</a>
-	        </ng-container>
-	         <ng-container [ngSwitch]="toggledFilter==3">
-	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">City</a>
-	        	<a class="btn waves-effect waves-light btn" (click)="filterCity(3)" *ngSwitchDefault>City</a>
-	        </ng-container>
-	         <ng-container [ngSwitch]="toggledFilter==4">
-	        	<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Venue</a>
-	        	<a class="btn waves-effect waves-light btn" (click)="filterVenue(4)" *ngSwitchDefault>Venue</a>
-	        </ng-container>
-        </blockquote>
-        
-
-        <div class="row">
-        <!-- Om någon kommer på ett bättre sätt än det här så fixa plz. Testade med en array för current results
-        		men då blir async problem -->
-        	<ng-container [ngSwitch]="toggledFilter==1">
-	        	<ng-container *ngSwitchCase="true">
-		        	<div class="col s12 m6 l4" *ngFor='let result of results'>
-		            <div class="card">
-		                <div class="card-image">
-		                  <!--<img src="images/sample-1.jpg" alt="TODO">-->
-		                  <!--<span class="card-title">{{ result.title }}</span>-->
-		                </div>
-		                <div class="card-content">
-		                  <p>Title: {{ result.displayName }}</p>
-		                  <p>Location: {{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</p>
-		                  <p>Date: {{ result.start?.date ? result.start.date : 'Not specified'}}</p>
-		                  <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
-		                  <p>Artist: {{ result.performance ? result.performance[0].artist.displayName : 'Not specified' }}</p>
-		                </div>
-		                <div class="card-action valign">
-		                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
-		                </div>    
-		            </div>
-		          </div>
-		        </ng-container>
-		        <ng-container *ngSwitchCase="false">
-		        	<div class="col s12 m6 l4" *ngFor='let result of filteredResults'>
-		            <div class="card">
-		                <div class="card-image">
-		                  <!--<img src="images/sample-1.jpg" alt="TODO">-->
-		                  <!--<span class="card-title">{{ result.title }}</span>-->
-		                </div>
-		                <div class="card-content">
-                      <p>Title: {{ result.displayName }}</p>
-                      <p>Location: {{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</p>
-                      <p>Date: {{ result.start?.date ? result.start.date : 'Not specified'}}</p>
-                      <p>Time: {{ result.start?.time ? result.start?.time  : 'Not specified'}}</p>
-                      <p>Artist: {{ result.performance ? result.performance[0].artist.displayName : 'Not specified' }}</p>
-                    </div>
-		                <div class="card-action valign">
-		                  <a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
-		                </div>    
-		            </div>
-		          </div>
-		        </ng-container>
-        	</ng-container>
-          
-        </div>
-        <!-- Artist results -->
-        <blockquote>
-           <h5>Artists found for: {{ searchTerm }}</h5>
-        </blockquote>
-        <div class="row">
-          <div *ngFor='let artist of artists' class="col s12 m6 l4">
-          <a [routerLink]="['/artist', artist.id]">
-         	<div class="card hoverable">
-         		<div class="card-image">
-                  <img class="responsive-img" src="{{ artist.images[1]?.url }}" alt="No image found!">
-                  <span class="card-title">{{ artist.name }}</span>
-                </div>
-          	</div>
-          </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngSwitchCase="true">
-      <app-loading-indicator></app-loading-indicator>
-    </div>
+	<div *ngSwitchCase="false">
+		<div class="container">
+			<div class="row">
+				<div class="col m6 l6 s12">
+					<blockquote>
+						<h5>Music events found for: <b>{{ searchTerm }}</b></h5>
+					</blockquote>
+					
+					<h6>Search for: </h6>
+					<!-- The button/filter that is currently active is disabled -->
+					<ng-container [ngSwitch]="toggledFilter==1">
+					<a class="btn disabled waves-effect waves-light btn" *ngSwitchCase="true">All</a>
+					<a class="btn waves-effect waves-light btn" (click)="noFilter(1)" *ngSwitchDefault>All</a>
+					</ng-container>
+					<ng-container [ngSwitch]="toggledFilter==2">
+					<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Artist</a>
+					<a class="btn waves-effect waves-light btn" (click)="filterArtist(2)" *ngSwitchDefault>Artist</a>
+					</ng-container>
+					<ng-container [ngSwitch]="toggledFilter==3">
+					<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">City</a>
+					<a class="btn waves-effect waves-light btn" (click)="filterCity(3)" *ngSwitchDefault>City</a>
+					</ng-container>
+					<ng-container [ngSwitch]="toggledFilter==4">
+					<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Venue</a>
+					<a class="btn waves-effect waves-light btn" (click)="filterVenue(4)" *ngSwitchDefault>Venue</a>
+					</ng-container>
+					<div class="row">
+						<!-- Om någon kommer på ett bättre sätt än det här så fixa plz. Testade med en array för current results
+						men då blir async problem -->
+						<ng-container [ngSwitch]="toggledFilter==1">
+						<ng-container *ngSwitchCase="true">
+						<div class="col s12 m12 l12" *ngFor='let result of results'>
+							<div class="card concert">
+								<div class="card-image">
+									<!--<img src="images/sample-1.jpg" alt="TODO">-->
+									<!--<span class="card-title">{{ result.title }}</span>-->
+								</div>
+								<div class="card-content">
+									<h5>{{ result.displayName }}</h5>
+									<div class="chip">
+									{{ result.start?.date ? result.start.date : 'Date not specified'}} - 
+									{{ result.start?.time ? result.start?.time  : 'Time not specified'}}
+									</div>
+									<div class="chip">{{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</div>
+									<br>							
+									Performers: <div *ngFor='let performer of result.performance' class="chip">{{ performer.artist.displayName }}</div>
+								</div>
+								<div class="card-action valign">
+									<a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
+								</div>
+							</div>
+						</div>
+						</ng-container>
+						<ng-container *ngSwitchCase="false">
+						<div class="col s12 m12 l12" *ngFor='let result of filteredResults'>
+							<div class="card">
+								<div class="card-image">
+									<!--<img src="images/sample-1.jpg" alt="TODO">-->
+									<!--<span class="card-title">{{ result.title }}</span>-->
+								</div>
+								<div class="card-content">
+									<h5>{{ result.displayName }}</h5>
+									<div class="chip">
+									{{ result.start?.date ? result.start.date : 'Date not specified'}} - 
+									{{ result.start?.time ? result.start?.time  : 'Time not specified'}}
+									</div>
+									<div class="chip">{{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</div>
+									<br>							
+									Performers: <div *ngFor='let performer of result.performance' class="chip">{{ performer?.artist.displayName ? performer.artist.displayName : 'Not specified' }}</div>
+								</div>
+								<div class="card-action valign">
+									<a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
+								</div>
+							</div>
+						</div>
+						</ng-container>
+						</ng-container>
+						
+					</div>
+				</div>
+				<!-- Artist results -->
+				<div class="col m6 l6 s12">
+					<blockquote>
+						<h5>Artists found for: <b>{{ searchTerm }}</b></h5>
+					</blockquote>
+					<div class="row">
+						<div *ngFor='let artist of artists' class="col s12 m6 l4">
+							<a [routerLink]="['/artist', artist.id]">
+								<div class="card hoverable artist">
+									<div class="card-image">
+										<img class="responsive-img" src="{{ artist.images[1]?.url }}" alt="No image found!">
+										<span class="card-title">{{ artist.name }}</span>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div *ngSwitchCase="true">
+	<app-loading-indicator></app-loading-indicator>
 </div>
-
-
-
+</div>
