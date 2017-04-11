@@ -12,8 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  favCount = 4;
-  revCount = 4;
+  favCount = 3;
+  revCount = 3;
   user = this.authService.user;
   userId = this.authService.userId;
   userInfo: FirebaseListObservable<any>;
