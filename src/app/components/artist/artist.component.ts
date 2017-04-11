@@ -180,6 +180,10 @@ export class ArtistComponent extends Loading implements OnInit {
     this.reviewService.addArtistAsFavourite(this.userInfo.uid, this.artist);
   }
 
+  removeFavourite() {
+  	this.reviewService.removeArtistAsFavourite(this.userInfo.uid, this.artist);
+  }
+
   // param artist is the artist object
   private searchConcertsByArtist(artist) {
     this.concertService.getArtistsByName(artist.name).subscribe(
