@@ -39,12 +39,12 @@
 								<div class="card-content">
 									<h5>{{ result.displayName }}</h5>
 									<div class="chip">
-									{{ result.start?.date ? result.start.date : 'Date not specified'}} - 
-									{{ result.start?.time ? result.start?.time  : 'Time not specified'}}
+									<b>{{ result.start?.date ? result.start.date : 'Date not specified'}} - 
+									{{ result.start?.time ? result.start?.time  : 'Time not specified'}}</b>
 									</div>
-									<div class="chip">{{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</div>
+									<div class="chip"><b>{{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</b></div>
 									<br>							
-									Performers: <div *ngFor='let performer of result.performance' class="chip">{{ performer.artist.displayName }}</div>
+									Performers: <div *ngFor='let performer of result.performance' class="chip"><a class="orange-text" [routerLink]="['/search', performer.artist.displayName]">{{ performer.artist.displayName }}</a></div>
 								</div>
 								<div class="card-action valign">
 									<a href="#" [routerLink]="['/concert', result.id ]">Read more</a>
