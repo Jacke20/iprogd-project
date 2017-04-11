@@ -24,4 +24,13 @@ export class ReviewService {
  		this.af.database.object('users/' + userID + '/reviews/' + objectToAdd.artist)
  			.set(objectToAdd);
  	}
+
+ 	addArtistAsFavourite(userID, artistObject) {
+ 		let objectToAdd = {
+ 			artist_id: artistObject.id,
+ 			artist_name: artistObject.name,
+ 			image_url: artistObject.images[0]
+ 		};
+ 		this.af.database.object('users/' + userID + '/favourites/' + artistObject.id).update(objectToAdd);
+ 	}
 }

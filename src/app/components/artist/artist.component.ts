@@ -28,6 +28,7 @@ export class ArtistComponent extends Loading implements OnInit {
   playingID: number;
   userRating: number; // the score that the current user has given the artist
   artistID: number;
+  isFavourite: boolean;
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService,
     private reviewService: ReviewService, private authService: AuthService,
@@ -165,6 +166,13 @@ export class ArtistComponent extends Loading implements OnInit {
     }
     return null;
   }
+
+  // Adds the artist as a favourite for the user in the DB
+  addFavourite() {
+    this.reviewService.addArtistAsFavourite(this.userInfo.uid, this.artist);
+    console.log("SKURRR");
+  }
+
   // param artist is the artist object
   private searchConcertsByArtist(artist) {
     this.concertService.getArtistsByName(artist.name).subscribe(
