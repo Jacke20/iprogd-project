@@ -34,6 +34,8 @@ export class ConcertComponent extends Loading implements OnInit {
           this.lat = data.resultsPage.results.event.location ? data.resultsPage.results.event.location.lat : null;
           this.lng = data.resultsPage.results.event.location ? data.resultsPage.results.event.location.lng : null;
           this.concert = data.resultsPage.results.event;
+          console.log("YAAAAAAAAAA");
+          console.log(this.concert);
 
           // Get artist for concert
           this.spotifyService.searchArtists(data.resultsPage.results.event.performance[0].artist.displayName).subscribe(

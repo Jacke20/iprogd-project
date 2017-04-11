@@ -9,7 +9,7 @@
         </div>
         <div class="card-stacked">
           <div class="card-content black-text">
-            <span class="card-title">Performer</span>
+            <span class="card-title"><b>Headliner:</b> {{ concert?.performance[0].displayName }}</span>
             <p>Info about the artist from spotify/wikipedia goes here. Song snippets too...</p>
           </div>
           <div class="card-action">
@@ -24,14 +24,19 @@
     <div class="col s12">
       <div class="card white">
         <div class="card-content black-text">
-          <span class="card-title">Venue</span>
-          <p>Info about the venue goes here. Probably add an actual map as well later... :P</p>
+          <span class="card-title"><b>Venue</b></span>
+          <ul class="collection">
+            <li class="collection-item"><b>Name: </b>{{ concert?.venue.displayName }}</li>
+            <li class="collection-item"><b>Address: </b>{{ concert?.venue.street }}, {{ concert?.venue.city.displayName }}</li>
+            <li class="collection-item"><b>Phone: </b>{{ concert?.venue.phone ? concert.venue.phone : 'Not Available'}}</li>
+          </ul>
+          <h5>Map</h5>
           <sebm-google-map [latitude]="lat" [longitude]="lng">
             <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
           </sebm-google-map>
         </div>
         <div class="card-action">
-          <a href="#">Go to venue's web page</a>
+          <a href="{{ concert?.venue.website }}">Go to venue's web page</a>
         </div>
       </div>
     </div>
@@ -41,11 +46,22 @@
     <div class="col s12">
       <div class="card white">
         <div class="card-content black-text">
-          <span class="card-title">Information</span>
-          <p>Information about where to buy tickets, opening act's and shit go here</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link....but do we really need one here??</a>
+          <span class="card-title"><b>Event</b></span>
+          <h5>Performances</h5>
+          <ul class="collection">
+            <li class="collection-item"><b>Headliner: </b>{{ concert?.performance[0].displayName }}</li>
+            <ng-container *ngFor="let performer of concert?.performance; let i=index">
+           		<ng-container *ngIf="i>0">
+           			<li class="collection-item"><b>Supporting act: </b>{{ performer.displayName }}</li>
+           		</ng-container>
+            </ng-container>
+          </ul>
+          <h5>Good to know</h5>
+          <ul class="collection">
+          	<li class="collection-item"><b>Date: </b>{{ concert?.start.date }}</li>
+          	<li class="collection-item"><b>Time: </b>{{ concert?.start.time }}</li>
+          	<li class="collection-item"><b>Age Restriction: </b>{{ concert?.ageRestriction ? concert.ageRestriction : 'None'}}</li>
+          </ul>
         </div>
       </div>
     </div>
