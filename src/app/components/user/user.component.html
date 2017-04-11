@@ -21,7 +21,7 @@
 				<div class="card-content">
 					<span class="card-title">Favourites</span>
 					<div class="row">
-					<div *ngFor="let favourite of favourites; let i=index">
+					<div *ngFor="let favourite of favourites | async; let i=index">
                 	<div *ngIf="i<favCount && favourite != null"> <!-- We only show the 3 first artists -->
                 		<!-- Card for one artist -->
 	                		<div class="col s4">
@@ -48,7 +48,6 @@
 				<div class="card-content">
 					<span class="card-title">Reviews</span>
 					<div *ngFor="let review of reviews | async; let i=index">
-					{{ item | json}}
                 	<div *ngIf="i<revCount && review != null"> <!-- We only show the 3 first reviews -->
                 		<!-- Card for one review -->
                 		<div class="row">

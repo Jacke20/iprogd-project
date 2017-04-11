@@ -39,25 +39,14 @@ export class UserComponent implements OnInit {
 
   getUserInfo(): void {
     this.userInfo = this.angularFire.database.list('users/' + this.userId, { preserveSnapshot: true });
-    this.userInfo
-      .subscribe(snapshots => {
-        snapshots.forEach(snapshot => {
-          if(snapshot.val().length > 0) {
-            switch (snapshot.key) {
-              case "favourites":
-                this.favourites = snapshot.val();
-                break;
-              default:
-                // code...
-                break;
-            }
-          }
-        });
-    });
   }
  
   getUserReviews(): void {
     this.reviews = this.angularFire.database.list('users/' + this.userId + '/reviews');
+  }
+
+  getUserFavourites(): void {
+    this.favourites = this.angularFire.database.list('users/' + this.userId + '/favourites');
   }
 
   // ngOnInit used to keep complex logic out of the constructor. There are other ng methods for things like changes etc.
@@ -66,6 +55,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
     this.getUserReviews();
+    this.getUserFavourites();
     console.log(this.reviews);
     console.log(this.favourites);
     console.log("hello");
