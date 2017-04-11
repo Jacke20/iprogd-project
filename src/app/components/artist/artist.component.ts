@@ -18,7 +18,7 @@ export class ArtistComponent extends Loading implements OnInit {
   // Om du lyckas få det att fungera med bara userInfo = {} så go right ahead
   // Lägger in dummyvärden som skrivs över på init för att dis shit e dumb
   userInfo = {uid: "-1", displayName: "ha"};
-  artist = {};
+  artist = {name: null};
   topTracks = [];
   audios = [];
   reviews = [];
@@ -143,14 +143,25 @@ export class ArtistComponent extends Loading implements OnInit {
   onSubmitReview(value: any) {
     // TODO: MAKE sure that the user is logged in before submitting review
     let reviewObject = {};
+    let reviewObjectUser = {};
     reviewObject[this.userInfo.uid] = {
         content: value.review_text,
         rating: this.userRating,
         reviewer: this.userInfo.displayName,
         title: value.review_title
-      }
+    }
+
+    reviewObjectUser = {
+        artist_id: this.artistID,
+        artist_name: this.artist.name,
+        content: value.review_text,
+        rating: this.userRating,
+        title: value.review_title,
+    }
     // Use reviewService to add to DB.
     this.reviewService.addReviewForArtist(this.artistID, reviewObject);
+    // Add for user as well
+    this.reviewService.addReviewForUser(this.userInfo.uid, reviewObjectUser);
     // Get reviews again once new one has been added.
     this.reviewService.getReviewsForArtist(this.artistID).subscribe(
         data => {

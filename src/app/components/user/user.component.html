@@ -19,15 +19,15 @@
 		<div class="col s6">
 			<div class="card">
 				<div class="card-content">
-					<span class="card-title"><b>Favourites</b></span>
+					<span class="card-title">Favourites</span>
 					<div class="row">
 					<div *ngFor="let favourite of favourites; let i=index">
                 	<div *ngIf="i<favCount && favourite != null"> <!-- We only show the 3 first artists -->
                 		<!-- Card for one artist -->
 	                		<div class="col s4">
-						              	<img src="{{ favourite.image_url }}" onerror="this.src='https://tinyclipart.com/resource/singer-clipart/singer-clipart-karaoke-icon-hi.png'" alt="" class="circle responsive-img">
+						              	<img src="{{ favourite.image_url }}" alt="" class="circle responsive-img">
 						              	<p class="flow-text center">
-						              		<a href="#" style="color:orange" [routerLink]="['/artist', favourite.artist_id]">
+						              		<a href="#" [routerLink]="['/artist', favourite.artist_id]">
 			                        			{{ favourite.artist_name }}
 			                        		</a>
 			                        	</p>
@@ -46,8 +46,9 @@
 		<div class="col s6">
 			<div class="card">
 				<div class="card-content">
-					<span class="card-title"><b>Reviews</b></span>
-					<div *ngFor="let review of reviews; let i=index">
+					<span class="card-title">Reviews</span>
+					<div *ngFor="let review of reviews | async; let i=index">
+					{{ item | json}}
                 	<div *ngIf="i<revCount && review != null"> <!-- We only show the 3 first reviews -->
                 		<!-- Card for one review -->
                 		<div class="row">
@@ -71,7 +72,7 @@
 		                        </div>
 		                        <br>
 		                        <p>Review written for: 
-		     						<a href="#" style="color:orange" [routerLink]="['/artist', review.artist_id ]">
+		     						<a href="#" [routerLink]="['/artist', review.artist_id ]">
 		                        	{{ review.artist_name }}
 		                        	</a>
 		                        </p>
@@ -88,5 +89,10 @@
 				</div>
 			</div>
 		</div>
+		<ul>
+			<li class="text" *ngFor="let user of users | async">
+				<b>{{user.$key}}</b>&nbsp;<span>{{user.description}}</span>
+			</li>
+		</ul>
 	</div>
 </div>
