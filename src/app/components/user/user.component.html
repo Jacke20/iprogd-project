@@ -25,7 +25,7 @@
                 	<div *ngIf="i<favCount && favourite != null"> <!-- We only show the 3 first artists -->
                 		<!-- Card for one artist -->
 	                		<div class="col s4">
-						              	<img src="{{ favourite.image_url }}" onerror="this.src='https://image.flaticon.com/icons/png/512/78/78373.png'" alt="" class="circle responsive-img">
+						              	<img src="{{ favourite.image_url.url }}" onerror="this.src='https://image.flaticon.com/icons/png/512/78/78373.png'" alt="" class="circle responsive-img">
 						              	<p class="flow-text center">
 						              		<a href="#" class="orange-text" [routerLink]="['/artist', favourite.artist_id]">
 			                        			{{ favourite.artist_name }}
