@@ -44,9 +44,6 @@ export class UserComponent implements OnInit {
         snapshots.forEach(snapshot => {
           if(snapshot.val().length > 0) {
             switch (snapshot.key) {
-              case "reviews":
-                this.reviews = snapshot.val();
-                break;
               case "favourites":
                 this.favourites = snapshot.val();
                 break;
@@ -59,13 +56,16 @@ export class UserComponent implements OnInit {
     });
   }
 
+  getUserReviews(): void {
+    this.reviews = this.angularFire.database.list('users/' + this.userId + '/reviews');
+  }
+
   // ngOnInit used to keep complex logic out of the constructor. There are other ng methods for things like changes etc.
   // Read about lifecycle hooks to learn more.
   // We used the ngOnInit Lifecycle Hook to get users when our AppComponent activates.
   ngOnInit(): void {
-    this.getUsers();
-    console.log(this.user);
     this.getUserInfo();
+    this.getUserReviews();
     console.log(this.reviews);
     console.log(this.favourites);
     console.log("hello");
