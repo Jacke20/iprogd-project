@@ -33,4 +33,10 @@ export class ReviewService {
  		};
  		this.af.database.object('users/' + userID + '/favourites/' + artistObject.id).update(objectToAdd);
  	}
+
+ 	// Gets the favourtie object of a artist for a user.
+ 	getArtistFavourite(userID, artistID) {
+ 		return this.af.database.object('users/' + userID + '/favourites/' + artistID, { preserveSnapshot: true });
+
+ 	}
 }

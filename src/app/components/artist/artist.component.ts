@@ -54,6 +54,14 @@ export class ArtistComponent extends Loading implements OnInit {
         data => {
           this.artist = data;
           this.searchConcertsByArtist(this.artist);
+          // Determin if artist is a favourite or not
+          this.reviewService.getArtistFavourite(this.userInfo.uid, data.id).subscribe(snapshot => {
+            if (snapshot.val() != null) {
+              this.isFavourite = true;
+            } else {
+              this.isFavourite = false;
+            }
+          });
           this.loading_ready(0);
         }
       );
@@ -170,7 +178,6 @@ export class ArtistComponent extends Loading implements OnInit {
   // Adds the artist as a favourite for the user in the DB
   addFavourite() {
     this.reviewService.addArtistAsFavourite(this.userInfo.uid, this.artist);
-    console.log("SKURRR");
   }
 
   // param artist is the artist object
