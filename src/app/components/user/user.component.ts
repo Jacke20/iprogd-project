@@ -55,7 +55,7 @@ export class UserComponent implements OnInit {
         });
     });
   }
-
+ 
   getUserReviews(): void {
     this.reviews = this.angularFire.database.list('users/' + this.userId + '/reviews');
   }
