@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
   <nav id="main-nav">
   	<div class="nav-wrapper">
-  		<a routerLink="home" routerLinkActive="active" class="brand-logo center hide-on-med-and-down">MyGIG</a>
+  		<a routerLink="home" routerLinkActive="active" class="brand-logo center">MyGIG</a>
   		<a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" data-activates="mobile-demo" class="button-collapse link"><i class="material-icons">menu</i></a>
       <ul class="left">
         <li>
@@ -24,32 +24,7 @@
         </li>
       </ul>
       
-      
-  		<ul class="right hide-on-med-and-down">
-  		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
-        <li>
-          <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
-          <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
-         
-        </li>
-  	  </ul>
-  	  <ul class="side-nav" id="mobile-demo">
-        <li>
-          <form class="searchform">
-            <div class="input-field searchbar">
-              <input id="search" type="search" required>
-              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-        </li>
-  		  <li><a routerLink="/concerts" routerLinkActive="active">Concert</a></li>
-  		  <li><a routerLink="/user" routerLinkActive="active">{{ (af.auth | async)?.google.displayName }}</a></li>
-        <li>
-          <button *ngIf="!isAuth()" class="waves-effect waves-light btn" (click)="login()">Login With Google account</button>
-          <button *ngIf="isAuth()" class="waves-effect waves-light btn"(click)="logout()">Logout</button>
-        </li>
-      </ul>
+    
    	</div>
   </nav>
 </div>

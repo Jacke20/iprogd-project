@@ -26,7 +26,7 @@ export class ConcertService {
   private headers = new Headers();
 
   constructor(private http: Http) {
-    this.CORS = '';
+    //this.CORS = '';
   }
 
   getConcerts(lat, lng) {
