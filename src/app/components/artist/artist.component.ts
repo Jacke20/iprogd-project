@@ -57,15 +57,15 @@ export class ArtistComponent extends Loading implements OnInit {
           this.artist = data;
           this.searchConcertsByArtist(this.artist);
           // Determin if artist is a favourite or not
-          this.reviewService.getArtistFavourite(this.userInfo.uid, data.id).subscribe(snapshot => {
-            if (this.authService.isAuthenticated) {
+          if (this.authService.isAuthenticated()) {
+            this.reviewService.getArtistFavourite(this.userInfo.uid, data.id).subscribe(snapshot => {
               if (snapshot.val() != null) {
                 this.isFavourite = true;
               } else {
                 this.isFavourite = false;
               }
-            }
-          });
+            });
+          }
           this.loading_ready(0);
         }
       );

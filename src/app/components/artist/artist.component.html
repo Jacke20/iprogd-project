@@ -9,7 +9,7 @@
     <div class="container">
       <blockquote>
         <h2>{{ artist.name }}</h2>
-        <ng-container *ngIf="isAuth()" [ngSwitch]="isFavourite">
+        <ng-container [ngSwitch]="isFavourite && isAuth()">
           <a *ngSwitchCase="false" class="waves-effect waves-light btn" (click)="addFavourite()">
             <i class="material-icons right">perm_identity</i>Add Favourite
           </a>
