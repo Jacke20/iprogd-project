@@ -21,10 +21,6 @@
 					<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">City</a>
 					<a class="btn waves-effect waves-light btn" (click)="filterCity(3)" *ngSwitchDefault>City</a>
 					</ng-container>
-					<ng-container [ngSwitch]="toggledFilter==4">
-					<a *ngSwitchCase="true" class="btn disabled waves-effect waves-light btn">Venue</a>
-					<a class="btn waves-effect waves-light btn" (click)="filterVenue(4)" *ngSwitchDefault>Venue</a>
-					</ng-container>
 					<div class="row">
 						<!-- Om någon kommer på ett bättre sätt än det här så fixa plz. Testade med en array för current results
 						men då blir async problem -->
@@ -62,12 +58,12 @@
 								<div class="card-content">
 									<h5>{{ result.displayName }}</h5>
 									<div class="chip">
-									{{ result.start?.date ? result.start.date : 'Date not specified'}} - 
-									{{ result.start?.time ? result.start?.time  : 'Time not specified'}}
+									<b>{{ result.start?.date ? result.start.date : 'Date not specified'}} - 
+									{{ result.start?.time ? result.start?.time  : 'Time not specified'}}</b>
 									</div>
-									<div class="chip">{{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</div>
+									<div class="chip"><b>{{ result.venue?.displayName ? result.venue.displayName : result.displayName }}, {{ result.location?.city ? result.location.city : result.city.displayName }}</b></div>
 									<br>							
-									Performers: <div *ngFor='let performer of result.performance' class="chip">{{ performer?.artist.displayName ? performer.artist.displayName : 'Not specified' }}</div>
+									Performers: <div *ngFor='let performer of result.performance' class="chip"><a class="orange-text" [routerLink]="['/search', performer.artist.displayName]">{{ performer.artist.displayName }}</a></div>
 								</div>
 								<div class="card-action valign">
 									<a href="#" [routerLink]="['/concert', result.id ]">Read more</a>

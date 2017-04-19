@@ -40,7 +40,7 @@ export class SearchComponent extends Loading implements OnInit {
       this.searchArtistsByName();
       this.searchConcertsByLocation();
       this.searchConcertsByArtist();
-      this.searchConcertsByVenue();
+      //this.searchConcertsByVenue();
       // No filter is standard
       this.noFilter(1);
       
