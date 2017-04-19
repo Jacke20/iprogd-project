@@ -50,7 +50,9 @@ export class AppComponent {
   }
 
   logout() {
-    this.router.navigate(['/home']);
+    if(this.router.url == "/user") {
+      this.router.navigate(['/home']);
+    }
     return this.authService.logout();
   }
 
