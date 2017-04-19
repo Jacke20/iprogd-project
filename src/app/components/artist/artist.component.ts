@@ -39,7 +39,7 @@ export class ArtistComponent extends Loading implements OnInit {
   ngOnInit() {
     this.showWriteReview = false; // Not shown by default
       this.authService.af.auth.subscribe(auth => {
-        if (this.authService.isAuthenticated) {
+        if (this.authService.isAuthenticated()) {
            // kan inte sätta this.user = auth eftersom den INSISTERAR att user inte har ett "google"-fält
            // så jag tar bara fram det jag behöver like dis.
            this.userInfo = {uid: auth.uid, displayName: auth.google.displayName};
