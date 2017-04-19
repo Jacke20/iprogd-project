@@ -3,12 +3,15 @@ import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 
 import { UserService } from './services/user.service';
 import { Observable, Subject} from "rxjs/Rx";
 import { Router } from "@angular/router";
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+
 import { AuthService } from "./services/auth.service";
 
 
 // TODO: Remove
 import { SpotifyService }    from "./services/spotify.service";
 import { ConcertService }    from "./services/concert.service";
+
 
 
 
@@ -26,7 +29,8 @@ export class AppComponent {
   songs = [];
 
   constructor(public af: AngularFire, private authService: AuthService, 
-    private spotifyService: SpotifyService, private concertService: ConcertService, private router: Router) {
+    private spotifyService: SpotifyService, private concertService: ConcertService, private router: Router
+    , private location: Location) {
 
     // TODO: Remove later
     //spotifyService.getAlbumsForArtist("7FBDXY8U17aasVTH3rgxbS");
@@ -51,6 +55,7 @@ export class AppComponent {
 
   logout() {
     this.router.navigate(['/home']);
+    location.reload();
     return this.authService.logout();
   }
 
