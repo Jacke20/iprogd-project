@@ -10,7 +10,16 @@
         <div class="card-stacked">
           <div class="card-content black-text">
             <span class="card-title"><b>Headliner:</b> {{ concert?.performance[0].displayName }}</span>
-            <p>Info about the artist from spotify/wikipedia goes here. Song snippets too...</p>
+            <p>Popularity on Spotify: </p>
+            <div class="progress">
+              <div [style.width]="artistPopularity + '%'" class="determinate"></div>
+            </div>
+            <p>Genres: </p>
+            <ng-container *ngFor="let genre of artist?.genres">
+              <div class="chip">
+                {{ genre }}
+              </div>
+            </ng-container>
           </div>
           <div class="card-action">
             <a href="#" [routerLink]="['/artist', id ]">Go to artist's page</a>

@@ -15,6 +15,7 @@ import { Loading }           from '../../classes/loading';
 export class ConcertComponent extends Loading implements OnInit {
   concert: {};
   artist: {};
+  artistPopularity: number;
   id: number;
 	title: string = 'My first angular2-google-maps project';
 	lat: number = 51.678418; // byt dessa till koordinater för själva eventet
@@ -42,6 +43,7 @@ export class ConcertComponent extends Loading implements OnInit {
                 data => {
                     this.artist = data;
                     this.id = data.id;
+                    this.artistPopularity = data.popularity;
                     console.log(this.artist);
                     this.ready();
                   }
