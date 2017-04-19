@@ -8,8 +8,7 @@ import { SearchComponent }         from './components/search/search.component';
 import { AuthGuard }               from './guards/auth.guard';
 import { AdminComponent }          from './components/admin/admin.component';
 import { ArtistComponent }         from './components/artist/artist.component';
-
-
+import { AboutComponent }         from './components/about/about.component';
 
 const appRoutes: Routes = [
   { path: 'concert/:id', component: ConcertComponent },
@@ -17,6 +16,7 @@ const appRoutes: Routes = [
   { path: 'search/:location', component: SearchComponent },
   { path: 'home', component: HomeComponent },
   { path: 'artist/:id', component: ArtistComponent },
+  { path: 'about', component: AboutComponent },
 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },

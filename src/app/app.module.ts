@@ -38,6 +38,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { SearchComponent } from './components/search/search.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
+import { AboutComponent } from './components/about/about.component';
 
 // Angularfire2 documentation https://github.com/angular/angularfire2/tree/master/docs
 export const firebaseConfig = {
@@ -75,7 +76,8 @@ initializeApp(firebaseConfig);
     ArtistComponent,
     AlbumComponent,
     SafePipe,
-    LoadingIndicatorComponent
+    LoadingIndicatorComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

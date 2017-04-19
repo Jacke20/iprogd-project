@@ -9,3 +9,13 @@ nav .nav-wrapper form, nav .nav-wrapper form .input-field{
 input[type="search"] {
   height: 64px !important; /* or height of nav */
 }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}

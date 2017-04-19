@@ -5,7 +5,7 @@ a.link {
   cursor: pointer;
 }
 
-body {
+body, app-root {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
