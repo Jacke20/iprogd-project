@@ -31,7 +31,7 @@ export class ConcertComponent extends Loading implements OnInit {
 
       this.concertService.getConcertDetails(params['id']).subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.lat = data.resultsPage.results.event.location ? data.resultsPage.results.event.location.lat : null;
           this.lng = data.resultsPage.results.event.location ? data.resultsPage.results.event.location.lng : null;
           this.concert = data.resultsPage.results.event;
@@ -44,7 +44,7 @@ export class ConcertComponent extends Loading implements OnInit {
                     this.artist = data;
                     this.id = data.id;
                     this.artistPopularity = data.popularity;
-                    console.log(this.artist);
+                    //console.log(this.artist);
                     this.ready();
                   }
               );

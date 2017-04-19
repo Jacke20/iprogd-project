@@ -57,7 +57,7 @@ const myFirebaseAuthConfig = {
 // Log entire db
 // TODO: Remove when project finished
 initializeApp(firebaseConfig);
-database().ref().on('value', snapshot => console.log(snapshot.val()));
+//database().ref().on('value', snapshot => console.log(snapshot.val()));
 
 @NgModule({
   declarations: [

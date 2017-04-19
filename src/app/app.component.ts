@@ -30,21 +30,9 @@ export class AppComponent {
 
   constructor(public af: AngularFire, private authService: AuthService, 
     private spotifyService: SpotifyService, private concertService: ConcertService, private router: Router
-    , private location: Location) {
-
-    // TODO: Remove later
-    //spotifyService.getAlbumsForArtist("7FBDXY8U17aasVTH3rgxbS");
-
-    // We have to call subscribe which lets us know when the request is finished since our
-    // service methods return Observables and they use promises.
-    /*
-    spotifyService.searchArtists("Bankroll fresh").subscribe(
-      data => console.log(data)
-    );
-    */
+    ,private location: Location) {
   }
 
-  // Global authentication methods
   isAuth() {
     return this.authService.isAuthenticated();
   }

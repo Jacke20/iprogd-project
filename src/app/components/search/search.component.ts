@@ -79,7 +79,7 @@ export class SearchComponent extends Loading implements OnInit {
             this.concertService.getConcertsByMetroId(metroId)
             .subscribe(
               data => {
-                console.log(data);
+                //console.log(data);
                 if(data.resultsPage.results) {
                   this.results.push.apply(this.results, data.resultsPage.results.event);
                 }

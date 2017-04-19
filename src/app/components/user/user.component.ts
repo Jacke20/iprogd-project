@@ -56,9 +56,11 @@ export class UserComponent implements OnInit {
     this.getUserInfo();
     this.getUserReviews();
     this.getUserFavourites();
+   /*
     console.log(this.reviews);
     console.log(this.favourites);
     console.log("hello");
+    */
   }
 
 

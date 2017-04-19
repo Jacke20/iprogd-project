@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate() {
-    console.log("Authguard called");
+    //console.log("Authguard called");
      // If user is not logged in we'll send them to the homepage 
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['']);
