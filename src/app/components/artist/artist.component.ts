@@ -141,40 +141,42 @@ export class ArtistComponent extends Loading implements OnInit {
   }
 
   onSubmitReview(value: any) {
-    // TODO: MAKE sure that the user is logged in before submitting review
-    let reviewObject = {};
-    let reviewObjectUser = {};
-    reviewObject[this.userInfo.uid] = {
-        content: value.review_text,
-        rating: this.userRating,
-        reviewer: this.userInfo.displayName,
-        title: value.review_title
-    }
+    if(this.isAuth()) {
+      // TODO: MAKE sure that the user is logged in before submitting review
+      let reviewObject = {};
+      let reviewObjectUser = {};
+      reviewObject[this.userInfo.uid] = {
+          content: value.review_text,
+          rating: this.userRating,
+          reviewer: this.userInfo.displayName,
+          title: value.review_title
+      }
 
-    reviewObjectUser = {
-        artist_id: this.artistID,
-        artist_name: this.artist.name,
-        content: value.review_text,
-        rating: this.userRating,
-        title: value.review_title,
+      reviewObjectUser = {
+          artist_id: this.artistID,
+          artist_name: this.artist.name,
+          content: value.review_text,
+          rating: this.userRating,
+          title: value.review_title,
+      }
+      // Use reviewService to add to DB.
+      this.reviewService.addReviewForArtist(this.artistID, reviewObject);
+      // Add for user as well
+      this.reviewService.addReviewForUser(this.userInfo.uid, reviewObjectUser);
+      // Get reviews again once new one has been added.
+      this.reviewService.getReviewsForArtist(this.artistID).subscribe(
+          data => {
+            this.reviews = data;
+            this.averageScore = 0;
+            for (let i = 0; i < data.length; i++) {
+              this.averageScore += Number(data[i].rating);
+            }
+            this.averageScore = Math.round(this.averageScore/data.length);
+            // TODO, check if user has already rated artist and use that as userRating.
+      });
+      // Hide the form
+      this.hideWriteReview()
     }
-    // Use reviewService to add to DB.
-    this.reviewService.addReviewForArtist(this.artistID, reviewObject);
-    // Add for user as well
-    this.reviewService.addReviewForUser(this.userInfo.uid, reviewObjectUser);
-    // Get reviews again once new one has been added.
-    this.reviewService.getReviewsForArtist(this.artistID).subscribe(
-        data => {
-          this.reviews = data;
-          this.averageScore = 0;
-          for (let i = 0; i < data.length; i++) {
-            this.averageScore += Number(data[i].rating);
-          }
-          this.averageScore = Math.round(this.averageScore/data.length);
-          // TODO, check if user has already rated artist and use that as userRating.
-    });
-    // Hide the form
-    this.hideWriteReview()
   }
 
   isPlaying(audios) {
@@ -193,6 +195,11 @@ export class ArtistComponent extends Loading implements OnInit {
 
   removeFavourite() {
   	this.reviewService.removeArtistAsFavourite(this.userInfo.uid, this.artist);
+  }
+
+  // Global authentication methods
+  isAuth() {
+    return this.authService.isAuthenticated();
   }
 
   // param artist is the artist object
