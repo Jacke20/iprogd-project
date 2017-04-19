@@ -195,10 +195,12 @@ export class ArtistComponent extends Loading implements OnInit {
   // Adds the artist as a favourite for the user in the DB
   addFavourite() {
     this.reviewService.addArtistAsFavourite(this.userInfo.uid, this.artist);
+    this.isFavourite = true;
   }
 
   removeFavourite() {
   	this.reviewService.removeArtistAsFavourite(this.userInfo.uid, this.artist);
+    this.isFavourite = false;
   }
 
   // Global authentication methods
