@@ -86,9 +86,10 @@ export class SearchComponent extends Loading implements OnInit {
           //this.results = data.events ? data.events.event : [];
           this.lat = data.resultsPage.results.location ? data.resultsPage.results.location[0].city.lat : null;
           this.lng = data.resultsPage.results.location ? data.resultsPage.results.location[0].city.lng : null;
+          let metroId = data.resultsPage.results.location ? data.resultsPage.results.location[0].metroArea.id : null;
           //console.log(data);
           if(this.lat != null && this.lng != null) {
-            this.concertService.getConcerts(this.lat, this.lng)
+            this.concertService.getConcertsByMetroId(metroId)
             .subscribe(
               data => {
                 console.log(data);
@@ -109,6 +110,7 @@ export class SearchComponent extends Loading implements OnInit {
   }
 
   private searchConcertsByArtist() {
+    /*
     this.concertService.getArtistsByName(this.searchTerm).subscribe(
       data => {
         if(data.resultsPage.results.artist) {
@@ -125,6 +127,16 @@ export class SearchComponent extends Loading implements OnInit {
         }
       }
     );
+    */
+    this.concertService.getConcertsByArtistName(this.searchTerm)
+      .subscribe(
+        data => {
+              if(data.resultsPage.results) {
+                this.results.push.apply(this.results, data.resultsPage.results.event);
+              }
+        }
+    );
+
   }
 
   private searchConcertsByVenue() {
