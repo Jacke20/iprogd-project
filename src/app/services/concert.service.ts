@@ -36,6 +36,13 @@ export class ConcertService {
       .catch(this.handleError);
   }
 
+  getConcertsByMetroId(metroId) {
+    this.apiUrl = this.CORS + this.SONGKICKBASEURL_START + 'location=sk:' + metroId + '&' + this.SONGKICKBASEURL_END;
+    return this.http.get(this.apiUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
   getConcertsByVenue(query) {
     this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/search/venues.json?query=' + query + '&' + this.SONGKICKBASEURL_END;
     return this.http.get(this.apiUrl)
@@ -66,6 +73,13 @@ export class ConcertService {
 
   getConcertsByArtistId(id) {
     this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/artists/' + id + '/calendar.json?' + this.SONGKICKBASEURL_END;
+    return this.http.get(this.apiUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+    getConcertsByArtistName(name) {
+    this.apiUrl = this.CORS + 'http://api.songkick.com/api/3.0/events.json?artist_name=' + name + '&' + this.SONGKICKBASEURL_END;
     return this.http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
