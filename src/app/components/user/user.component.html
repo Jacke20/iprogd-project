@@ -20,7 +20,7 @@
 			<div class="card">
 				<div class="card-content">
 					<span class="card-title"><b>Favourites</b></span>
-					<div *ngIf="(favourites | async).length==0">
+					<div *ngIf="(favourites | async)?.length==0">
 						<p class="center"><i class="grey-text">So empty... Start searching for artists and add them to your favourites!</i></p>
 					</div>
 					<div class="row">
@@ -38,13 +38,13 @@
 			                </div>
 	                	</div>
 					</div>
-					<div *ngIf="(favourites | async).length>favCount">
+					<div *ngIf="(favourites | async)?.length>favCount">
 						<p class="center showmorefav">
 							<a class="waves-effect waves-light btn" (click)="moreFav()">Show more</a>
 							<!-- moreFav() shows 3 more artists -->
 						</p>
 					</div>
-					<div *ngIf="(favourites | async).length>0 && (favourites | async).length<=favCount">
+					<div *ngIf="(favourites | async)?.length>0 && (favourites | async)?.length<=favCount">
 						<p class="center nomorefav">
 							<a class="waves-effect waves-light btn disabled">Show more</a>
 						</p>
@@ -57,7 +57,7 @@
 			<div class="card">
 				<div class="card-content">
 					<span class="card-title"><b>Reviews</b></span>
-					<div *ngIf="(reviews | async).length==0">
+					<div *ngIf="(reviews | async)?.length==0">
 						<p class="center"><i class="grey-text">This would show your reviews... if you had any</i></p>
 					</div>
 					<div *ngFor="let review of reviews | async; let i=index">
@@ -94,13 +94,13 @@
 	                  </div>
 	                </div>
                 </div>
-                	<div *ngIf="(reviews | async).length>revCount">
+                	<div *ngIf="(reviews | async)?.length>revCount">
 	                	<p class="center showmorerev">
 							<a class="waves-effect waves-light btn" (click)="moreRev()">Show more</a>
 							<!-- moreRev() shows 3 more reviews -->
 						</p>
 					</div>
-					<div *ngIf="(reviews | async).length>0 && (reviews | async).length<=revCount">
+					<div *ngIf="(reviews | async)?.length>0 && (reviews | async)?.length<=revCount">
 						<p class="center nomorerev">
 							<a class="waves-effect waves-light btn disabled">Show more</a>
 						</p>
