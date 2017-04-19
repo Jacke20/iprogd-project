@@ -38,11 +38,13 @@ export class ArtistComponent extends Loading implements OnInit {
 
   ngOnInit() {
     this.showWriteReview = false; // Not shown by default
-    this.authService.af.auth.subscribe(auth => {
-       // kan inte sätta this.user = auth eftersom den INSISTERAR att user inte har ett "google"-fält
-       // så jag tar bara fram det jag behöver like dis.
-       this.userInfo = {uid: auth.uid, displayName: auth.google.displayName};
-     });
+      this.authService.af.auth.subscribe(auth => {
+        if (this.authService.isAuthenticated) {
+           // kan inte sätta this.user = auth eftersom den INSISTERAR att user inte har ett "google"-fält
+           // så jag tar bara fram det jag behöver like dis.
+           this.userInfo = {uid: auth.uid, displayName: auth.google.displayName};
+         }
+       });
 
     this.route.params.subscribe(params => {
       this.artistID = params['id'];
@@ -56,10 +58,12 @@ export class ArtistComponent extends Loading implements OnInit {
           this.searchConcertsByArtist(this.artist);
           // Determin if artist is a favourite or not
           this.reviewService.getArtistFavourite(this.userInfo.uid, data.id).subscribe(snapshot => {
-            if (snapshot.val() != null) {
-              this.isFavourite = true;
-            } else {
-              this.isFavourite = false;
+            if (this.authService.isAuthenticated) {
+              if (snapshot.val() != null) {
+                this.isFavourite = true;
+              } else {
+                this.isFavourite = false;
+              }
             }
           });
           this.loading_ready(0);
