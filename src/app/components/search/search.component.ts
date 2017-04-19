@@ -26,7 +26,7 @@ export class SearchComponent extends Loading implements OnInit {
 
   constructor(private spotifyService: SpotifyService, private concertService: ConcertService, 
     private route: ActivatedRoute) { 
-    super(true);
+    super(true, 3);
   }
 
   ngOnInit() { 
@@ -34,32 +34,18 @@ export class SearchComponent extends Loading implements OnInit {
 
     this.route.params.subscribe(params => {
       this.results = [];
-      this.standby();
+      this.add_loading(0);
+      this.add_loading(1);
+      this.add_loading(2);
       this.searchTerm = params['location'];
 
       this.searchArtistsByName();
       this.searchConcertsByLocation();
       this.searchConcertsByArtist();
-      this.searchConcertsByVenue();
+      //this.searchConcertsByVenue();
       // No filter is standard
       this.noFilter(1);
-      
-
-
-/*
-       this.concertService.getVenue(this.searchTerm).subscribe(
-        data => {
-          var id = data.Venues[0].Id;
-          this.concertService.getConcertsByVenueId(id).subscribe(
-            data => {
-              this.results = data.Events ? data.Events : []
-              this.ready();
-            }
-          );
-        }
-      );
-
-      */
+     
      
     });
     
@@ -75,6 +61,7 @@ export class SearchComponent extends Loading implements OnInit {
         data => {
           this.artists = data.artists.items;
           //console.log(data.artists);
+          this.loading_ready(0);
         }
       );
   }
@@ -86,9 +73,10 @@ export class SearchComponent extends Loading implements OnInit {
           //this.results = data.events ? data.events.event : [];
           this.lat = data.resultsPage.results.location ? data.resultsPage.results.location[0].city.lat : null;
           this.lng = data.resultsPage.results.location ? data.resultsPage.results.location[0].city.lng : null;
+          let metroId = data.resultsPage.results.location ? data.resultsPage.results.location[0].metroArea.id : null;
           //console.log(data);
           if(this.lat != null && this.lng != null) {
-            this.concertService.getConcerts(this.lat, this.lng)
+            this.concertService.getConcertsByMetroId(metroId)
             .subscribe(
               data => {
                 console.log(data);
@@ -97,11 +85,11 @@ export class SearchComponent extends Loading implements OnInit {
                 }
                 //this.results += data.resultsPage.results.event ? data.resultsPage.results.event : [];
                 //console.log(this.results);
-                this.ready();
+              this.loading_ready(1);
               }
             );
           } else {
-             this.ready();
+            this.loading_ready(1);
             // TODO No results
           }
         }
@@ -109,33 +97,16 @@ export class SearchComponent extends Loading implements OnInit {
   }
 
   private searchConcertsByArtist() {
-    this.concertService.getArtistsByName(this.searchTerm).subscribe(
-      data => {
-        if(data.resultsPage.results.artist) {
-          let id = data.resultsPage.results.artist[0].id;
-          this.concertService.getConcertsByArtistId(id).subscribe(
-            data => {
-              if(data.resultsPage.results) {
-                this.results.push.apply(this.results, data.resultsPage.results.event);
-              }
-              //this.results = data.resultsPage.results.event ? data.resultsPage.results.event : [];
-              this.artistName = this.searchTerm;
-            }
-          );
+    this.concertService.getConcertsByArtistName(this.searchTerm)
+      .subscribe(
+        data => {
+          if(data.resultsPage.results) {
+            this.results.push.apply(this.results, data.resultsPage.results.event);
+          }
+          this.loading_ready(2);
         }
-      }
     );
-  }
 
-  private searchConcertsByVenue() {
-     this.concertService.getConcertsByVenue(this.searchTerm).subscribe(
-      data => {
-        console.log(data);
-        if(data.resultsPage.results) {
-          this.results.push.apply(this.results, data.resultsPage.results.venue);
-        }
-      }
-    );
   }
 
   noFilter(number) {

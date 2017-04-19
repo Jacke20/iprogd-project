@@ -9,7 +9,7 @@
     <div class="container">
       <blockquote>
         <h2>{{ artist.name }}</h2>
-        <ng-container [ngSwitch]="isFavourite">
+        <ng-container *ngIf="isAuth()" [ngSwitch]="isFavourite">
           <a *ngSwitchCase="false" class="waves-effect waves-light btn" (click)="addFavourite()">
             <i class="material-icons right">perm_identity</i>Add Favourite
           </a>
@@ -31,12 +31,13 @@
                 [size]="'large'"
                 [rating]="averageScore"
                 (onClick)="updateRating($event)"
+                [readOnly]="isAuth() ? false : true"
                 >
                 </star-rating-comp>
               </span>
               </h5>
               <!-- Card for form used for writing reviews -->
-              <div *ngIf="showWriteReview">
+              <div *ngIf="showWriteReview && isAuth()">
                 <div class="row">
                   <form #reviewForm="ngForm" (ngSubmit)="onSubmitReview(reviewForm.value)" class="col s12">
                     <div class="row">
