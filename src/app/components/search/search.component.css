@@ -1,13 +1,14 @@
 div.card {
   /*height: 200px;*/
   overflow: hidden;
+  background-size: cover;
 }
 
 .artist img {
 	height: 200px;
 }
 
-span.card-title {
+.card .card-image .card-title {
 	text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,
@@ -16,7 +17,10 @@ span.card-title {
 
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
-   padding: 3px;
+   padding: 5px;
    margin-bottom: 25px;
-   /*max-width: 85%;*/ 
+}
+
+.card .card-image {
+  background-image: cover;
 }
