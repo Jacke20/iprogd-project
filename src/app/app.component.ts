@@ -19,7 +19,6 @@ import { ConcertService }    from "./services/concert.service";
   providers: [UserService, SpotifyService, ConcertService] // TODO: Remove SpotifyService
 })
 export class AppComponent {
-  user = {};
   color = 'red'; // TODO: Remove later
 
   artists = [];
@@ -28,8 +27,6 @@ export class AppComponent {
 
   constructor(public af: AngularFire, private authService: AuthService, 
     private spotifyService: SpotifyService, private concertService: ConcertService, private router: Router) {
-    this.af.auth.subscribe(auth => console.log(auth));
-    this.user = authService.user;
 
     // TODO: Remove later
     //spotifyService.getAlbumsForArtist("7FBDXY8U17aasVTH3rgxbS");
@@ -53,6 +50,7 @@ export class AppComponent {
   }
 
   logout() {
+    this.router.navigate(['/home']);
     return this.authService.logout();
   }
 
