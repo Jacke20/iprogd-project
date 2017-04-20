@@ -26,36 +26,50 @@ export class UserComponent implements OnInit {
   }
 
   moreFav(): void {
-    this.favCount = this.favCount + 3;
+    if(this.authService.isAuthenticated()) {
+      this.favCount = this.favCount + 3;
+    }
   }
 
   moreRev(): void {
-    this.revCount = this.revCount + 3;
+    if(this.authService.isAuthenticated()) {
+      this.revCount = this.revCount + 3;
+    }
   }
 
   getUsers(): void {
-    this.users = this.userService.getUsers();
+    if(this.authService.isAuthenticated()) {
+      this.users = this.userService.getUsers();
+    }
   }
 
   getUserInfo(): void {
-    this.userInfo = this.angularFire.database.list('users/' + this.userId, { preserveSnapshot: true });
+    if(this.authService.isAuthenticated()) {
+      this.userInfo = this.angularFire.database.list('users/' + this.userId, { preserveSnapshot: true });
+    }
   }
  
   getUserReviews(): void {
-    this.reviews = this.angularFire.database.list('users/' + this.userId + '/reviews');
+    if(this.authService.isAuthenticated()) {
+      this.reviews = this.angularFire.database.list('users/' + this.userId + '/reviews');
+    }
   }
 
   getUserFavourites(): void {
-    this.favourites = this.angularFire.database.list('users/' + this.userId + '/favourites');
+    if(this.authService.isAuthenticated()) {
+      this.favourites = this.angularFire.database.list('users/' + this.userId + '/favourites');
+    }
   }
 
   // ngOnInit used to keep complex logic out of the constructor. There are other ng methods for things like changes etc.
   // Read about lifecycle hooks to learn more.
   // We used the ngOnInit Lifecycle Hook to get users when our AppComponent activates.
   ngOnInit(): void {
-    this.getUserInfo();
-    this.getUserReviews();
-    this.getUserFavourites();
+    if(this.authService.isAuthenticated()) {
+      this.getUserInfo();
+      this.getUserReviews();
+      this.getUserFavourites();
+    }
    /*
     console.log(this.reviews);
     console.log(this.favourites);

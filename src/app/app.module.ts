@@ -30,7 +30,6 @@ import { SignupComponent } from './components/signup/signup.component';
 // Temporary stuff
 import { initializeApp, database } from 'firebase';
 
-
 // Test
 import { TestDirective } from './directives/test.directive';
 import { TestPipe } from './pipes/test.pipe';

@@ -24,11 +24,6 @@ export class AlbumComponent implements OnInit {
       this.spotifyService.getAlbumsForArtist(params['id'], 4).subscribe(
         data => this.albums = data.items
       );
-
-
-      this.spotifyService.getAlbumsForArtist(params['id']).subscribe(
-        data => console.log(data)
-      );
     });
   }
 

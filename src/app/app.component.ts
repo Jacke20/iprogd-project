@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 import { UserService } from './services/user.service';
-import { Observable, Subject} from "rxjs/Rx";
+import { Observable, Subject } from "rxjs/Rx";
 import { Router } from "@angular/router";
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
@@ -13,24 +13,21 @@ import { SpotifyService }    from "./services/spotify.service";
 import { ConcertService }    from "./services/concert.service";
 
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService, SpotifyService, ConcertService] // TODO: Remove SpotifyService
+  providers: [UserService] // TODO: Remove SpotifyService
 })
 export class AppComponent {
-  color = 'red'; // TODO: Remove later
+  user = null;
 
   artists = [];
   events = [];
   songs = [];
 
   constructor(public af: AngularFire, private authService: AuthService, 
-    private spotifyService: SpotifyService, private concertService: ConcertService, private router: Router
-    ,private location: Location) {
+    private router: Router, private location: Location) {
   }
 
   isAuth() {
@@ -38,13 +35,21 @@ export class AppComponent {
   }
 
   login() {
-    return this.authService.login();
+    this.authService.login().then(
+      (success)=> {
+        this.user = this.authService.user;
+        this.router.navigate(['/home']);
+      }
+    );
   }
 
   logout() {
-    this.router.navigate(['/home']);
-    location.reload();
-    return this.authService.logout();
+    this.authService.logout().then(
+      (success)=> {
+        this.user = null;
+        this.router.navigate(['/home']);
+      }
+    );
   }
 
   onSubmit(value: any) {
