@@ -30,6 +30,12 @@ export class AppComponent {
     private router: Router, private location: Location) {
   }
 
+  ngOnInit() {
+    if(this.isAuth()) {
+      this.user = this.authService.user;
+    }
+  }
+
   isAuth() {
     return this.authService.isAuthenticated();
   }

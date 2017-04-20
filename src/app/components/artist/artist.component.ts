@@ -6,6 +6,9 @@ import { ConcertService }    from "../../services/concert.service";
 import { ReviewService } from '../../services/review.service';
 import { AuthService } from "../../services/auth.service";
 
+import 'rxjs/add/operator/takeUntil';
+import { Subject } from 'rxjs/Subject';
+
 import { Loading }              from "../../classes/loading";
 
 @Component({
@@ -15,6 +18,7 @@ import { Loading }              from "../../classes/loading";
   providers: [SpotifyService, ConcertService, ReviewService]
 })
 export class ArtistComponent extends Loading implements OnInit {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   // Om du lyckas få det att fungera med bara userInfo = {} så go right ahead
   // Lägger in dummyvärden som skrivs över på init för att dis shit e dumb
   userInfo = {uid: "-1", displayName: "ha"};
@@ -38,15 +42,15 @@ export class ArtistComponent extends Loading implements OnInit {
 
   ngOnInit() {
     this.showWriteReview = false; // Not shown by default
-      this.authService.af.auth.subscribe(auth => {
-        if (this.authService.isAuthenticated()) {
-           // kan inte sätta this.user = auth eftersom den INSISTERAR att user inte har ett "google"-fält
-           // så jag tar bara fram det jag behöver like dis.
-           this.userInfo = {uid: auth.uid, displayName: auth.google.displayName};
-         }
-       });
+    this.authService.af.auth.takeUntil(this.ngUnsubscribe).subscribe(auth => {
+      if (this.authService.isAuthenticated()) {
+         // kan inte sätta this.user = auth eftersom den INSISTERAR att user inte har ett "google"-fält
+         // så jag tar bara fram det jag behöver like dis.
+         this.userInfo = {uid: auth.uid, displayName: auth.google.displayName};
+       }
+     });
 
-    this.route.params.subscribe(params => {
+    this.route.params.takeUntil(this.ngUnsubscribe).takeUntil(this.ngUnsubscribe).subscribe(params => {
       this.artistID = params['id'];
       // Start 2 loading tasks
       this.add_loading(0);
@@ -58,7 +62,7 @@ export class ArtistComponent extends Loading implements OnInit {
           this.searchConcertsByArtist(this.artist);
           // Determin if artist is a favourite or not
           if (this.authService.isAuthenticated()) {
-            this.reviewService.getArtistFavourite(this.userInfo.uid, data.id).subscribe(snapshot => {
+            this.reviewService.getArtistFavourite(this.userInfo.uid, data.id).takeUntil(this.ngUnsubscribe).subscribe(snapshot => {
               if (snapshot.val() != null) {
                 this.isFavourite = true;
               } else {
@@ -104,6 +108,11 @@ export class ArtistComponent extends Loading implements OnInit {
       );
       */
     });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   playSong(id) {
