@@ -224,12 +224,14 @@ export class ArtistComponent extends Loading implements OnInit {
   private searchConcertsByArtist(artist) {
     this.concertService.getArtistsByName(artist.name).subscribe(
       data => {
-        let id = data.resultsPage.results.artist[0].id;
-        this.concertService.getConcertsByArtistId(id).subscribe(
-          data => {
-            this.events = data.resultsPage.results.event ? data.resultsPage.results.event : [];
-          }
-        );
+        let id = data.resultsPage.results.artist ? data.resultsPage.results.artist[0].id : null;
+        if(id) {
+          this.concertService.getConcertsByArtistId(id).subscribe(
+            data => {
+              this.events = data.resultsPage.results.event ? data.resultsPage.results.event : [];
+            }
+          );
+        }
       }
     );
   }
