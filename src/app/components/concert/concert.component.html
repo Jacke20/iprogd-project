@@ -35,7 +35,7 @@
         <div class="card-content black-text">
           <span class="card-title"><b>Venue</b></span>
           <ul class="collection">
-            <li class="collection-item"><b>Name: </b>{{ concert?.venue.displayName }}</li>
+            <li class="collection-item"><b>Name: </b>{{ concert?.venue?.displayName }}</li>
             <li class="collection-item"><b>Address: </b>{{ concert?.venue.street }}, {{ concert?.venue.city.displayName }}</li>
             <li class="collection-item"><b>Phone: </b>{{ concert?.venue.phone ? concert.venue.phone : 'Not Available'}}</li>
           </ul>
@@ -61,7 +61,7 @@
             <li class="collection-item"><b>Headliner: </b>{{ concert?.performance[0].displayName ? concert.performance[0].displayName : 'Not Available'}}</li>
             <ng-container *ngFor="let performer of concert?.performance; let i=index">
            		<ng-container *ngIf="i>0">
-           			<li class="collection-item"><b>Supporting act: </b>{{ performer.displayName }}</li>
+           			<li class="collection-item"><b>Supporting act: </b>{{ performer?.displayName }}</li>
            		</ng-container>
             </ng-container>
           </ul>

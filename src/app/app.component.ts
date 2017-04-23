@@ -17,7 +17,7 @@ import { ConcertService }    from "./services/concert.service";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService] // TODO: Remove SpotifyService
+  providers: [UserService, SpotifyService, ConcertService]
 })
 export class AppComponent {
   user = null;
