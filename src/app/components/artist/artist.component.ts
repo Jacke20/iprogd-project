@@ -50,7 +50,7 @@ export class ArtistComponent extends Loading implements OnInit {
        }
      });
 
-    this.route.params.takeUntil(this.ngUnsubscribe).takeUntil(this.ngUnsubscribe).subscribe(params => {
+    this.route.params.takeUntil(this.ngUnsubscribe).subscribe(params => {
       this.artistID = params['id'];
       // Start 2 loading tasks
       this.add_loading(0);
