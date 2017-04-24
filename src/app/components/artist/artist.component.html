@@ -123,8 +123,11 @@
             		</div>
             	</div>
             </div>
-            <div *ngIf="events.length==0">
+            <div *ngIf="!this.hasEvents">
             	<h4>This artist has no upcoming events...</h4>
+            </div>
+            <div *ngIf="this.hasEvents">
+              <h4>Loading...</h4>
             </div>
           </div>
         </div>

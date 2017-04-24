@@ -33,6 +33,7 @@ export class ArtistComponent extends Loading implements OnInit {
   userRating: number; // the score that the current user has given the artist
   artistID: number;
   isFavourite: boolean;
+  hasEvents = true;
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService,
     private reviewService: ReviewService, private authService: AuthService,
@@ -229,6 +230,9 @@ export class ArtistComponent extends Loading implements OnInit {
           this.concertService.getConcertsByArtistId(id).subscribe(
             data => {
               this.events = data.resultsPage.results.event ? data.resultsPage.results.event : [];
+              if(this.events.length == 0) {
+                this.hasEvents = false;
+              }
             }
           );
         }
