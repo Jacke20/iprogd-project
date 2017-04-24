@@ -123,11 +123,13 @@
             		</div>
             	</div>
             </div>
-            <div *ngIf="!this.hasEvents">
-            	<h4>This artist has no upcoming events...</h4>
-            </div>
-            <div *ngIf="this.hasEvents">
-              <h4>Loading...</h4>
+            <div [ngSwitch]="this.hasEvents">
+              <div *ngSwitchCase="0">
+                <h4>This artist has no upcoming events...</h4>
+              </div>
+              <div *ngSwitchCase="1">
+                <h4>Loading...</h4>
+              </div>
             </div>
           </div>
         </div>
